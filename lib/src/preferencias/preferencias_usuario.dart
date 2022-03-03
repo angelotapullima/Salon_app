@@ -6,7 +6,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
-  static final Preferences _instancia = new Preferences._internal();
+  static final Preferences _instancia =  Preferences._internal();
 
   factory Preferences() {
     return _instancia;
@@ -17,95 +17,16 @@ class Preferences {
   Preferences._internal();
 
   initPrefs() async {
-    this._prefs = await SharedPreferences.getInstance();
+    _prefs = await SharedPreferences.getInstance();
   }
 
   clearPreferences() async {
-    final prefs = Preferences();
 
-    var version = prefs.versionApp;
-    var yape = prefs.nombreYape;
-    var plin = prefs.nombrePlin;
-    var numero = prefs.numeroPagoOnline;
     await _prefs!.clear();
 
-    prefs.versionApps = version;
-    prefs.nombreYapes = yape;
-    prefs.nombrePlins = plin;
-    prefs.numeroPagoOnlines = numero;
   }
 
-  get estadoCargaInicial {
-    return _prefs!.getString('estadoCargaInicial') ;
-  }
 
-  set estadoCargaInicials(String value) {
-    _prefs!.setString('estadoCargaInicial', value);
-  }
-
-  get nombrePlin {
-    return   _prefs!.getString('nombrePlin') ?? "";
-  }
-
-  set nombrePlins(String value) {
-    _prefs!.setString('nombrePlin', value);
-  }
-
-  set onScrolls(bool value) {
-    _prefs!.setBool('onScroll', value);
-  }
-
-  get onScroll {
-    return   _prefs!.getBool('onScroll') ?? "";
-  }
-
-  get nombreYape {
-    return  _prefs!.getString('nombreYape') ?? "";
-  }
-
-  set nombreYapes(String value) {
-    _prefs!.setString('nombreYape', value);
-  }
-
-  get numeroPagoOnline {
-    return  _prefs!.getString('numeroPagoOnline') ?? "";
-  }
-
-  set numeroPagoOnlines(String value) {
-    _prefs!.setString('numeroPagoOnline', value);
-  }
-
-  get codigoUser {
-    return  _prefs!.getString('codigoUser') ?? "";
-  }
-
-  set codigoUsers(String value) {
-    _prefs!.setString('codigoUser', value);
-  }
-
-  get apellidoPaterno {
-    return  _prefs!.getString('apellidoPaterno') ?? "";
-  }
-
-  set apellidoPaternos(String value) {
-    _prefs!.setString('apellidoPaterno', value);
-  }
-
-  get apellidoMaterno {
-    return _prefs!.getString('apellidoMaterno') ?? "";
-  }
-
-  set apellidoMaternos(String value) {
-    _prefs!.setString('apellidoMaterno', value);
-  }
-
-  get fechaCreacion {
-    return _prefs!.getString('fechaCreacion');
-  }
-
-  set fechaCreacions(String value) {
-    _prefs!.setString('fechaCreacion', value);
-  }
 
   get idUser {
     return _prefs!.getString('id_user');
@@ -114,14 +35,7 @@ class Preferences {
   set idUsers(String value) {
     _prefs!.setString('id_user', value);
   }
-/* 
-  get password {
-    return _prefs!.getString('password')?? "";
-  }
-
-  set passwords(String value) {
-    _prefs!.setString('password', value);
-  } */
+  
 
   get idPerson {
     _prefs!.getString('id_person');
@@ -147,13 +61,6 @@ class Preferences {
     _prefs!.setString('user_email', value);
   }
 
-  get userEmailValidateCode {
-    return _prefs!.getString('user_email_validate_code');
-  }
-
-  set userEmailValidateCodes(String value) {
-    _prefs!.setString('user_email_validate_code', value);
-  }
 
   get image {
     return _prefs!.getString('image');
@@ -250,46 +157,9 @@ class Preferences {
   set versionApps(String value) {
     _prefs!.setString('versionApp', value);
   }
+  
 
-  get userNum {
-    return _prefs!.getString('user_num');
-  }
 
-  set userNums(String value) {
-    _prefs!.setString('user_num', value);
-  }
-
-  get userPosicion {
-    return _prefs!.getString('user_posicion');
-  }
-
-  set userPosicions(String value) {
-    _prefs!.setString('user_posicion', value);
-  }
-
-  get userHabilidad {
-    return _prefs!.getString('user_habilidad');
-  }
-
-  set userHabilidads(String value) {
-    _prefs!.setString('user_habilidad', value);
-  }
-/* 
-  get ubigeoId2 {
-    return _prefs.getString('ubigeo_id');
-  }
-
-  set ubigeoId2(String value) {
-    _prefs.setString('ubigeo_id', value);
-  } */
-
-  get tieneNegocio {
-    return _prefs!.getString('tiene_negocio');
-  }
-
-  set tieneNegocios(String value) {
-    _prefs!.setString('tiene_negocio', value);
-  }
 
   get token {
     return _prefs!.getString('token');
@@ -307,99 +177,5 @@ class Preferences {
     _prefs!.setString('token_firebase', value);
   }
 
-  get ciudadID {
-    return _prefs!.getString('ciudadID');
-  }
 
-  set ciudadIDs(String value) {
-    _prefs!.setString('ciudadID', value);
-  }
-
-  //torneoID
-  //preferencia para guardar el id del torneo que visita, ya sea para editaro o visualizarlo
-  get torneoID {
-    return _prefs!.getString('torneoID');
-  }
-
-  set torneoIDs(String value) {
-    _prefs!.setString('torneoID', value);
-  }
-
-  get imagenTorneo {
-    return _prefs!.getString('imagenTorneo');
-  }
-
-  set imagenTorneos(String value) {
-    _prefs!.setString('imagenTorneo', value);
-  }
-
-  set torneoIDimagenTorneos(String value) {
-    _prefs!.setString('imagenTorneo', value);
-  }
-
-  get imagenLogoTorneo {
-    return _prefs!.getString('imagenLogoTorneo');
-  }
-
-  set imagenLogoTorneos(String value) {
-    _prefs!.setString('imagenLogoTorneo', value);
-  }
-
-  //categoriaID
-  //preferencia para guardar el id de la categoría o subtorneo que visita, ya sea para editaro o visualizarlo
-  /* get categoriaID {
-    return _prefs.getString('categoriaID');
-  }
-
-  set categoriaID(String value) {
-    _prefs.setString('categoriaID', value);
-  } */
-
-  get categoriaIDU {
-    return _prefs!.getString('categoriaIDU');
-  }
-
-  set categoriaIDUs(String value) {
-    _prefs!.setString('categoriaIDU', value);
-  }
-
-  get miTorneo {
-    return _prefs!.getString('miTorneo');
-  }
-
-  set miTorneos(String value) {
-    _prefs!.setString('miTorneo', value);
-  }
-
-  get validarCrearTorneo {
-    return _prefs!.getString('validarCrearTorneo');
-  }
-
-  set validarCrearTorneos(String value) {
-    _prefs!.setString('validarCrearTorneo', value);
-  }
-
-  get idFecha {
-    return _prefs!.getString('idFecha');
-  }
-
-  set idFechas(String value) {
-    _prefs!.setString('idFecha', value);
-  }
-
-  get nombreFecha {
-    return _prefs!.getString('nombreFecha');
-  }
-
-  set nombreFechas(String value) {
-    _prefs!.setString('nombreFecha', value);
-  }
-
-  get idUserBufiPay {
-    return _prefs!.getString('idUserBufiPay');
-  }
-
-  set idUserBufiPays(String value) {
-    _prefs!.setString('idUserBufiPay', value);
-  }
 }

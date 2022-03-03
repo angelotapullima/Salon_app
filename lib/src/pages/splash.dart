@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -11,22 +12,15 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-    /* Future.delayed(const Duration(seconds: 2), () async {
-      final loginApi = LoginApi();
-      final cuotaApi = CuotaApi();
+     Future.delayed(const Duration(seconds: 2), () async {
+      final preferences = Preferences();
 
-      cuotaApi.getCuotas();
-      String? token = await StorageManager.readData('token');
-
-      if (token == null || token.isEmpty) {
+      if (preferences.idUser == null || preferences.idUser.isEmpty) {
         Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
       } else {
-        loginApi.consultarUsuario();
-        final bottomBloc = ProviderBloc.botton(context);
-        bottomBloc.changePage(0);
         Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       }
-    }); */
+    }); 
 
     super.initState();
   }

@@ -3,11 +3,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
-import 'package:salon_app/src/pages/login.dart';
-import 'package:salon_app/src/pages/padres/home_padres.dart';
+import 'package:salon_app/src/pages/home.dart';
+import 'package:salon_app/src/pages/login.dart'; 
 import 'package:salon_app/src/pages/splash.dart';
+import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = Preferences();
+  //final prefsBufiPaymets = new PreferencesBufiPayments();
+
+  await prefs.initPrefs();
   runApp(const MyApp());
 }
 
@@ -42,13 +48,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ProviderBloc(
-          child: ScreenUtilInit(
+      child: ScreenUtilInit(
         designSize: const Size(375, 812),
         builder: () => MaterialApp(
           title: 'Sethi',
           theme: ThemeData(
             primarySwatch: Colors.blueGrey,
-            textTheme: GoogleFonts.latoTextTheme(),
+            textTheme: GoogleFonts.poppinsTextTheme(),
           ),
           debugShowCheckedModeBanner: false,
           builder: (BuildContext context, Widget? child) {
@@ -74,7 +80,7 @@ class _MyAppState extends State<MyApp> {
           routes: {
             'splash': (BuildContext context) => const Splash(),
             'login': (BuildContext context) => const Login(),
-            'homePadres': (BuildContext context) => const HomePadres(),
+            'home': (BuildContext context) => const HomePage(),
           },
         ),
       ),
