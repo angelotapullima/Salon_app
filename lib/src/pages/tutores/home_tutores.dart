@@ -3,23 +3,23 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salon_app/src/api/local_notification_api.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
-import 'package:salon_app/src/pages/padres/tabs/inicio_tab.dart';
-import 'package:salon_app/src/pages/padres/tabs/perfil_padres.dart';
+import 'package:salon_app/src/pages/tutores/tabs/inicio_tutores_tab.dart';
+import 'package:salon_app/src/pages/tutores/tabs/perfil_tutores.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 
-class HomePadre extends StatefulWidget {
-  const HomePadre({Key? key}) : super(key: key);
+class HomeTutores extends StatefulWidget {
+  const HomeTutores({Key? key}) : super(key: key);
   @override
-  _HomePadreState createState() => _HomePadreState();
+  _HomeTutoresState createState() => _HomeTutoresState();
 }
 
-class _HomePadreState extends State<HomePadre> {
+class _HomeTutoresState extends State<HomeTutores> {
   List<Widget> pageList = [];
 
   @override
   void initState() {
-    pageList.add(const InicioPadre());
-    pageList.add(const PerfilPadres());
+    pageList.add(const InicioTurores());
+    pageList.add(const PerfilTutores());
 
     super.initState();
     LocalNotificationApi.init(initScheluded: true);

@@ -156,7 +156,7 @@ class _LoginState extends State<Login> {
                         onPressed: () async {
                           if (_usuarioController.text.length > 0) {
                             if (_passwdController.text.length > 0) {
-                              _controller.changeLoadding(true);
+                              _controller.chCarlosadding(true);
 
                               Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
                               /*  final _login = LoginApi();
@@ -170,7 +170,7 @@ class _LoginState extends State<Login> {
                                 showToast2(res.message.toString(), Colors.black);
                               } */
 
-                              _controller.changeLoadding(false);
+                              _controller.chCarlosadding(false);
                             } else {
                               showToast2('Ingrese su contraseña', Colors.black);
                             }
@@ -218,7 +218,7 @@ class _LoginState extends State<Login> {
 
 class ControllerLogin extends ChangeNotifier {
   bool loadding = false;
-  void changeLoadding(bool v) {
+  void chCarlosadding(bool v) {
     loadding = v;
     notifyListeners();
   }

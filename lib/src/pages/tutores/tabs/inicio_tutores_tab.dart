@@ -5,17 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/pages/padres/Citaciones/citaciones_content.dart';
 import 'package:salon_app/src/pages/padres/Incidencias/incidencias_content.dart';
 import 'package:salon_app/src/pages/padres/actividades/actividades_content.dart';
+import 'package:salon_app/src/pages/tutores/Aulas/aulas_content.dart';
 import 'package:salon_app/src/utils/colors.dart';
 
-class InicioPadre extends StatelessWidget {
+class InicioTurores extends StatelessWidget {
   static final _controller = Controller();
-  const InicioPadre({Key? key}) : super(key: key);
+  const InicioTurores({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: const Color.fromARGB(255, 245, 246, 248),
-      backgroundColor: Color(0xfff1eff6),
+      backgroundColor: const Color(0xfff1eff6),
       body: SafeArea(
         child: AnimatedBuilder(
           animation: _controller,
@@ -93,19 +94,6 @@ class InicioPadre extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: ScreenUtil().setWidth(10),
-                  ),
-                  child: Text(
-                    'Papá de  Carlos Jr, 6° B',
-                    style: TextStyle(
-                      fontSize: ScreenUtil().setSp(12),
-                      color: const Color(0xff323a54),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: ScreenUtil().setHeight(10),
                 ),
@@ -114,19 +102,20 @@ class InicioPadre extends StatelessWidget {
                   height: ScreenUtil().setHeight(20),
                 ),
                 Expanded(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(40),
-                      ),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
                     ),
-                    child: (_controller.valueBoton == 1)
-                        ? const ActividadesContent()
-                        : (_controller.valueBoton == 2)
-                            ? const IncideciasContent()
-                            : const CitacionesContent(),
+                    child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(40),
+                            topRight: Radius.circular(40),
+                          ),
+                        ),
+                        child: (_controller.valueBoton == 1) ? const AulasTutores() : const IncideciasContent()),
                   ),
                 )
               ],
@@ -176,13 +165,26 @@ class InicioPadre extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Center(
-                  child: Text(
-                    'Actividades',
-                    style: GoogleFonts.poppins(
-                      color: (_controller.valueBoton == 1) ? colorTextSelect : colorTextUnSelect,
-                      fontWeight: FontWeight.w500,
-                      fontSize: ScreenUtil().setSp(14),
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        FontAwesome5Brands.servicestack,
+                        size: ScreenUtil().setSp(17),
+                        color: (_controller.valueBoton == 1) ? Colors.red : Colors.grey,
+                      ),
+                      SizedBox(
+                        width: ScreenUtil().setWidth(5),
+                      ),
+                      Text(
+                        'Aulas',
+                        style: GoogleFonts.poppins(
+                          color: (_controller.valueBoton == 1) ? colorTextSelect : colorTextUnSelect,
+                          fontWeight: FontWeight.w500,
+                          fontSize: ScreenUtil().setSp(14),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -203,40 +205,26 @@ class InicioPadre extends StatelessWidget {
                   color: (_controller.valueBoton == 2) ? tabSelected : tabUnSelected,
                 ),
                 child: Center(
-                  child: Text(
-                    'Incidencias',
-                    style: GoogleFonts.poppins(
-                      color: (_controller.valueBoton == 2) ? colorTextSelect : colorTextUnSelect,
-                      fontWeight: FontWeight.w500,
-                      fontSize: ScreenUtil().setSp(14),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                _controller.changeValueBoton(3);
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: ScreenUtil().setHeight(7),
-                  horizontal: ScreenUtil().setWidth(2),
-                ),
-                decoration: BoxDecoration(
-                  color: (_controller.valueBoton == 3) ? tabSelected : tabUnSelected,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: Text(
-                    'Citaciones',
-                    style: GoogleFonts.poppins(
-                      color: (_controller.valueBoton == 3) ? colorTextSelect : colorTextUnSelect,
-                      fontWeight: FontWeight.w500,
-                      fontSize: ScreenUtil().setSp(14),
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        AntDesign.switcher,
+                        size: ScreenUtil().setSp(17),
+                        color: (_controller.valueBoton == 2) ? Colors.red : Colors.grey,
+                      ),
+                      SizedBox(
+                        width: ScreenUtil().setWidth(5),
+                      ),
+                      Text(
+                        'Incidencias',
+                        style: GoogleFonts.poppins(
+                          color: (_controller.valueBoton == 2) ? colorTextSelect : colorTextUnSelect,
+                          fontWeight: FontWeight.w500,
+                          fontSize: ScreenUtil().setSp(14),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -12,15 +12,15 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-     Future.delayed(const Duration(seconds: 2), () async {
+    Future.delayed(const Duration(seconds: 2), () async {
       final preferences = Preferences();
 
       if (preferences.idUser == null || preferences.idUser.isEmpty) {
-        Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
-      } else {
         Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
       }
-    }); 
+    });
 
     super.initState();
   }
@@ -32,11 +32,7 @@ class _SplashState extends State<Splash> {
         children: [
           const SizedBox.expand(),
           Center(
-            child: SizedBox(
-              width: ScreenUtil().setWidth(350),
-              height: ScreenUtil().setHeight(350),
-              child: const FlutterLogo()
-            ),
+            child: SizedBox(width: ScreenUtil().setWidth(350), height: ScreenUtil().setHeight(350), child: const FlutterLogo()),
           ),
         ],
       ),
