@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:salon_app/src/models/incidencias_padres.dart';
+import 'package:salon_app/src/pages/padres/Citaciones/citaciones_content.dart';
+import 'package:salon_app/src/pages/padres/Incidencias/incidencias_content.dart';
 import 'package:salon_app/src/utils/colors.dart';
 
 class InicioPadre extends StatelessWidget {
@@ -12,7 +13,8 @@ class InicioPadre extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 246, 248),
+      //backgroundColor: const Color.fromARGB(255, 245, 246, 248),
+      backgroundColor: Color(0xfff1eff6),
       body: SafeArea(
         child: AnimatedBuilder(
           animation: _controller,
@@ -85,7 +87,7 @@ class InicioPadre extends StatelessWidget {
                     'Bienvenido, Angelo',
                     style: TextStyle(
                       fontSize: ScreenUtil().setSp(20),
-                      color: Colors.black,
+                      color: const Color(0xff323a54),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -98,7 +100,7 @@ class InicioPadre extends StatelessWidget {
                     'Papá de  Angelo Jr, 6° B',
                     style: TextStyle(
                       fontSize: ScreenUtil().setSp(12),
-                      color: Colors.black,
+                      color: const Color(0xff323a54),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -126,129 +128,14 @@ class InicioPadre extends StatelessWidget {
                             ),
                           )
                         : (_controller.valueBoton == 2)
-                            ? incidenciasContent()
-                            : const SizedBox(
-                                child: Center(
-                                  child: Text('Citaciones'),
-                                ),
-                              ),
+                            ? const IncideciasContent()
+                            : const CitacionesContent(),
                   ),
                 )
               ],
             );
           },
         ),
-      ),
-    );
-  }
-
-  Widget incidenciasContent() {
-    return SizedBox(
-      child: ListView.builder(
-        padding: EdgeInsets.only(
-          top: ScreenUtil().setHeight(15),
-        ),
-        itemCount: listIncidencias.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: ScreenUtil().setHeight(10),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: ScreenUtil().setWidth(100),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: ScreenUtil().setWidth(5),
-                      vertical: ScreenUtil().setWidth(5),
-                    ),
-                    child: Text(
-                      '${listIncidencias[index].fecha}',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                        fontSize: ScreenUtil().setSp(16),
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: ScreenUtil().setSp(0.016),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
-                      itemCount: listIncidencias[index].lista!.length,
-                      itemBuilder: (context, index2) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 2,
-                                blurRadius: 2,
-                                offset: const Offset(2, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(2), horizontal: ScreenUtil().setWidth(4)),
-                          margin: EdgeInsets.symmetric(
-                            vertical: ScreenUtil().setHeight(8),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${listIncidencias[index].lista![index2].titulo}',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Reportado por: ',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: ScreenUtil().setSp(12)),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Text(
-                                      '  ${listIncidencias[index].lista![index2].personaRegistro} ',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: ScreenUtil().setSp(13.5),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                '${listIncidencias[index].lista![index2].detalle}',
-                                maxLines: 4,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: ScreenUtil().setSp(13)),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
       ),
     );
   }
