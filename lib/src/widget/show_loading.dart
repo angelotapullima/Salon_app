@@ -15,7 +15,7 @@ class ShowLoadding extends StatelessWidget {
             height: h,
             width: w,
             color: fondo,
-            child: Container(
+            child: SizedBox(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

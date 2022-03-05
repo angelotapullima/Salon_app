@@ -15,7 +15,7 @@ class InicioPadre extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: const Color.fromARGB(255, 245, 246, 248),
-      backgroundColor: Color(0xfff1eff6),
+      backgroundColor:const Color(0xfff1eff6),
       body: SafeArea(
         child: AnimatedBuilder(
           animation: _controller,

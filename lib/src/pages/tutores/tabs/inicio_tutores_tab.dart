@@ -17,9 +17,7 @@ class InicioTurores extends StatelessWidget {
         builder: (context, t) {
           return Scaffold(
             floatingActionButton: (_controller.valueBoton == 2)
-                ? FloatingActionButton(
-                    onPressed: () {},
-                    child: const Icon(Icons.add),
+                ? Container( 
                   )
                 : Container(),
             //backgroundColor: const Color.fromARGB(255, 245, 246, 248),

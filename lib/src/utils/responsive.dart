@@ -23,16 +23,16 @@ class Responsive {
 
   //ancho de la pantalla
   double wp(double percent) {
-    return this.width! * percent / 100;
+    return width! * percent / 100;
   }
 
   //alto de la pantalla
   double hp(double percent) {
-    return this.height! * percent / 100;
+    return height! * percent / 100;
   }
 
   //inch o diagonal del ratio de pantalla
   double ip(double percent) {
-    return this.inch! * percent / 100;
+    return inch! * percent / 100;
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:rxdart/rxdart.dart';
@@ -19,7 +21,7 @@ class LocalNotificationApi {
     );
   }
 
-  static Future init({bool initScheluded = false}) async {
+  static Future init({bool initScheluded = false}) async { 
     final android =    AndroidInitializationSettings('@mipmap/launcher_icon');
     final ios = IOSInitializationSettings();
     final settings = InitializationSettings(android: android, iOS: ios);

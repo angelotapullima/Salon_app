@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:salon_app/src/models/incidencias_padres.dart';
 
 class IncidenciasDetail extends StatefulWidget {

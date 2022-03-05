@@ -74,20 +74,20 @@ class _LoginState extends State<Login> {
                             color: colorPrimary,
                           ),
                           filled: true,
-                          fillColor: Color(0XFFEEEEEE),
+                          fillColor:const  Color(0XFFEEEEEE),
                           contentPadding:
                               EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color: const Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                         ),
                         style: TextStyle(
@@ -109,7 +109,7 @@ class _LoginState extends State<Login> {
                         obscureText: true,
                         decoration: InputDecoration(
                           filled: true,
-                          prefixIcon: Icon(
+                          prefixIcon:const  Icon(
                             Icons.lock_outline,
                             color: colorPrimary,
                           ),
@@ -119,20 +119,20 @@ class _LoginState extends State<Login> {
                             fontWeight: FontWeight.w400,
                             fontSize: ScreenUtil().setSp(15),
                           ),
-                          fillColor: Color(0XFFEEEEEE),
+                          fillColor: const Color(0XFFEEEEEE),
                           contentPadding:
                               EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color: Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                         ),
                         style: TextStyle(
@@ -154,8 +154,8 @@ class _LoginState extends State<Login> {
                         textColor: Colors.white,
                         elevation: 0,
                         onPressed: () async {
-                          if (_usuarioController.text.length > 0) {
-                            if (_passwdController.text.length > 0) {
+                          if (_usuarioController.text.isNotEmpty) {
+                            if (_passwdController.text.isNotEmpty) {
                               _controller.chCarlosadding(true);
 
                               Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
