@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:salon_app/src/pages/padres/Citaciones/citaciones_content.dart';
 import 'package:salon_app/src/pages/padres/Incidencias/incidencias_content.dart';
-import 'package:salon_app/src/pages/padres/actividades/actividades_content.dart';
 import 'package:salon_app/src/pages/tutores/Aulas/aulas_content.dart';
 import 'package:salon_app/src/utils/colors.dart';
 
@@ -14,14 +12,20 @@ class InicioTurores extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //backgroundColor: const Color.fromARGB(255, 245, 246, 248),
-      backgroundColor: const Color(0xfff1eff6),
-      body: SafeArea(
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, t) {
-            return Column(
+    return AnimatedBuilder(
+        animation: _controller,
+        builder: (context, t) {
+          return Scaffold(
+            floatingActionButton: (_controller.valueBoton == 2)
+                ? FloatingActionButton(
+                    onPressed: () {},
+                    child: const Icon(Icons.add),
+                  )
+                : Container(),
+            //backgroundColor: const Color.fromARGB(255, 245, 246, 248),
+            backgroundColor: const Color(0xfff1eff6),
+            body: SafeArea(
+                child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
@@ -31,54 +35,13 @@ class InicioTurores extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: ScreenUtil().setWidth(10),
                   ),
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  child: Row(children:  [
                     const CircleAvatar(
                       backgroundColor: Colors.teal,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey.shade300,
-                          ),
-                          borderRadius: BorderRadius.circular(5)),
-                      height: ScreenUtil().setHeight(50),
-                      width: ScreenUtil().setHeight(50),
-                      child: Center(
-                        child: Stack(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                const SizedBox(),
-                                const Icon(Fontisto.bell),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(width: ScreenUtil().setWidth(15)),
-                                Container(
-                                  height: ScreenUtil().setHeight(18),
-                                  width: ScreenUtil().setHeight(18),
-                                  //padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                                  decoration: const BoxDecoration(
-                                    color: Colors.blue,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Center(
-                                    child: Text(
-                                      '3',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    )
+                    const Spacer(),
+                    const Icon(Fontisto.search),
+                    SizedBox(width: ScreenUtil().setWidth(8)),
                   ]),
                 ),
                 Padding(
@@ -108,22 +71,21 @@ class InicioTurores extends StatelessWidget {
                       topRight: Radius.circular(40),
                     ),
                     child: Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40),
-                          ),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          topRight: Radius.circular(40),
                         ),
-                        child: (_controller.valueBoton == 1) ? const AulasTutores() : const IncideciasContent()),
+                      ),
+                      child: (_controller.valueBoton == 1) ? const AulasTutores() : const IncideciasContent(),
+                    ),
                   ),
                 )
               ],
-            );
-          },
-        ),
-      ),
-    );
+            )),
+          );
+        });
   }
 
   Container tabAnimated() {
