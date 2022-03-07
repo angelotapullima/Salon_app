@@ -76,7 +76,7 @@ class InicioTurores extends StatelessWidget {
                           topRight: Radius.circular(40),
                         ),
                       ),
-                      child: (_controller.valueBoton == 1) ? const AulasTutores() : const IncideciasContent(),
+                      child: (_controller.valueBoton == 1) ? const AulasTutores(valor:'1') : const IncideciasContent(),
                     ),
                   ),
                 )

@@ -4,7 +4,8 @@ import 'package:salon_app/src/models/salon_tutor_model.dart';
 import 'package:salon_app/src/pages/tutores/Aulas/details_salon.dart';
 
 class AulasTutores extends StatelessWidget {
-  const AulasTutores({Key? key}) : super(key: key);
+  final String valor;
+  const AulasTutores({Key? key,required this.valor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class AulasTutores extends StatelessWidget {
                           context,
                           PageRouteBuilder(
                             pageBuilder: (context, animation, secondaryAnimation) {
-                              return DetailSalonTutor(salon: listAulas[index1].lista![index3]);
+                              return DetailSalonTutor(salon: listAulas[index1].lista![index3],valor:valor);
                             },
                             transitionsBuilder: (context, animation, secondaryAnimation, child) {
                               var begin = const Offset(0.0, 1.0);
