@@ -628,7 +628,7 @@ class _RegistroActividadesState extends State<RegistroActividades> {
       fechaDato = "${picked!.year.toString().padLeft(2, '0')}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
       //inputfieldDateController.text = fechaDato;
 
-      print(fechaDato);
+
     });
   }
 }
