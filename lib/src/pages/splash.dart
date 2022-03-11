@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 
 class Splash extends StatefulWidget {
@@ -15,10 +16,12 @@ class _SplashState extends State<Splash> {
     Future.delayed(const Duration(seconds: 2), () async {
       final preferences = Preferences();
 
+      final bottomBloc = ProviderBloc.botton(context);
+      bottomBloc.changePage(0);
       if (preferences.idUser == null || preferences.idUser.isEmpty) {
-        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
-      } else {
         Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       }
     });
 

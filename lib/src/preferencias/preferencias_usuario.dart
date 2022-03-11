@@ -35,7 +35,7 @@ class Preferences {
   set idUsers(String value) {
     _prefs!.setString('id_user', value);
   }
-  
+  /* 
 
   get idPerson {
     _prefs!.getString('id_person');
@@ -43,7 +43,7 @@ class Preferences {
 
   set idPersons(String value) {
     _prefs!.setString('id_person', value);
-  }
+  } */
 
   get userNickname {
     return _prefs!.getString('user_nickname');
@@ -85,7 +85,7 @@ class Preferences {
   set personSurnames(String value) {
     _prefs!.setString('person_surname', value);
   }
-
+/* 
   get personDni {
     return _prefs!.getString('person_dni');
   }
@@ -124,7 +124,7 @@ class Preferences {
 
   set personNacionalidads(String value) {
     _prefs!.setString('person_nacionalidad', value);
-  }
+  }*/ 
 
   get rolNombre {
     return _prefs!.getString('rol_nombre');
@@ -141,7 +141,7 @@ class Preferences {
   set idRols(String value) {
     _prefs!.setString('id_rol', value);
   }
-
+/* 
   get personAddress {
     return _prefs!.getString('person_address');
   }
@@ -149,7 +149,7 @@ class Preferences {
   set personAddresss(String value) {
     _prefs!.setString('person_address', value);
   }
-
+ */
   get versionApp {
     return _prefs!.getString('versionApp');
   }

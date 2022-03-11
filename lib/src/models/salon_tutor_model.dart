@@ -1,67 +1,33 @@
-class SalonTutorModelHead {
-  String? grado;
-  List<SalonTutorModel>? lista;
+class AulaModel {
+  AulaModel({
+    this.idAula,
+    this.aulaGrado,
+    this.aulaSeccion,
+    this.aulaNivel,
+    this.aulaEstado,
+  });
+  String? idAula;
+  String? aulaGrado;
+  String? aulaSeccion;
+  String? aulaNivel;
+  String? aulaEstado;
+  
+  static List<AulaModel> fromJsonList(List<dynamic> json) => json.map((i) => AulaModel.fromJson(i)).toList();
 
-  SalonTutorModelHead({this.grado, this.lista});
+  Map<String, dynamic> toJson() => {
+        'idAula': idAula,
+        'aulaGrado': aulaGrado,
+        'aulaSeccion': aulaSeccion,
+        'aulaNivel': aulaNivel,
+        'aulaEstado': aulaEstado,
+      };
+
+  factory AulaModel.fromJson(Map<String, dynamic> json) => AulaModel(
+        idAula: json["idAula"],
+        aulaGrado: json["aulaGrado"],
+        aulaSeccion: json["aulaSeccion"],
+        aulaNivel: json["aulaNivel"],
+        aulaEstado: json["aulaEstado"],
+      );
 }
 
-class SalonTutorModel {
-  String? seccion;
-  String? grado;
-
-  SalonTutorModel({this.seccion, this.grado});
-}
-
-final List<SalonTutorModelHead> listAulas = [
-  SalonTutorModelHead(
-    grado: '4',
-    lista: [
-      SalonTutorModel(
-        seccion: 'A',
-        grado: '4',
-      ),
-      SalonTutorModel(
-        seccion: 'B',
-        grado: '4',
-      ),
-      SalonTutorModel(
-        seccion: 'C',
-        grado: '4',
-      ),
-    ],
-  ),
-  SalonTutorModelHead(
-    grado: '5',
-    lista: [
-      SalonTutorModel(
-        seccion: 'A',
-        grado: '5',
-      ),
-      SalonTutorModel(
-        seccion: 'B',
-        grado: '5',
-      ),
-      SalonTutorModel(
-        seccion: 'C',
-        grado: '5',
-      ),
-    ],
-  ),
-  SalonTutorModelHead(
-    grado: '6',
-    lista: [
-      SalonTutorModel(
-        seccion: 'A',
-        grado: '6',
-      ),
-      SalonTutorModel(
-        seccion: 'B',
-        grado: '6',
-      ),
-      SalonTutorModel(
-        seccion: 'C',
-        grado: '6',
-      ),
-    ],
-  ),
-];

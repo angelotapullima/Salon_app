@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:salon_app/src/api/login_api.dart';
+import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/utils/colors.dart';
 import 'package:salon_app/src/utils/utils.dart';
 import 'package:salon_app/src/widget/show_loading.dart';
@@ -40,13 +42,13 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       height: ScreenUtil().setHeight(61),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       child: FlutterLogo(
-                        size: ScreenUtil().setSp(200),
+                        size: 150,
                       ),
                     ),
                     Text(
-                      'Bienvenido',
+                      'Bienvenido ',
                       style: GoogleFonts.rambla(
                         fontWeight: FontWeight.w600,
                         fontSize: ScreenUtil().setSp(24),
@@ -74,16 +76,16 @@ class _LoginState extends State<Login> {
                             color: colorPrimary,
                           ),
                           filled: true,
-                          fillColor:const  Color(0XFFEEEEEE),
+                          fillColor: const Color(0XFFEEEEEE),
                           contentPadding:
                               EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color: const Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color: const Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
@@ -109,7 +111,7 @@ class _LoginState extends State<Login> {
                         obscureText: true,
                         decoration: InputDecoration(
                           filled: true,
-                          prefixIcon:const  Icon(
+                          prefixIcon: const Icon(
                             Icons.lock_outline,
                             color: colorPrimary,
                           ),
@@ -124,15 +126,15 @@ class _LoginState extends State<Login> {
                               EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color: const Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color: const Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(color:const  Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
+                            borderSide: BorderSide(color: const Color(0XFFEEEEEE), width: ScreenUtil().setWidth(1)),
                           ),
                         ),
                         style: TextStyle(
@@ -156,10 +158,8 @@ class _LoginState extends State<Login> {
                         onPressed: () async {
                           if (_usuarioController.text.isNotEmpty) {
                             if (_passwdController.text.isNotEmpty) {
-                              _controller.chCarlosadding(true);
-
-                              Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
-                              /*  final _login = LoginApi();
+                              _controller.changeLoadding(true);
+                              final _login = LoginApi();
                               final res = await _login.login(_usuarioController.text, _passwdController.text);
 
                               if (res.code == '1') {
@@ -168,9 +168,9 @@ class _LoginState extends State<Login> {
                                 Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
                               } else {
                                 showToast2(res.message.toString(), Colors.black);
-                              } */
+                              }
 
-                              _controller.chCarlosadding(false);
+                              _controller.changeLoadding(false);
                             } else {
                               showToast2('Ingrese su contraseña', Colors.black);
                             }
@@ -218,7 +218,7 @@ class _LoginState extends State<Login> {
 
 class ControllerLogin extends ChangeNotifier {
   bool loadding = false;
-  void chCarlosadding(bool v) {
+  void changeLoadding(bool v) {
     loadding = v;
     notifyListeners();
   }

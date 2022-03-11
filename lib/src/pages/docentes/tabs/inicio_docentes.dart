@@ -1,11 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/pages/padres/Citaciones/citaciones_content.dart';
 import 'package:salon_app/src/pages/padres/actividades/actividades_content.dart';
 import 'package:salon_app/src/pages/tutores/Aulas/aulas_content.dart';
+import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 import 'package:salon_app/src/utils/colors.dart';
+import 'package:salon_app/src/utils/responsive.dart';
 
 class InicioDocentes extends StatelessWidget {
   static final _controller = Controller();
@@ -13,6 +17,10 @@ class InicioDocentes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prefs = Preferences();
+    final responsive = Responsive.of(context);
+
+  
     return Scaffold(
       //backgroundColor: const Color.fromARGB(255, 245, 246, 248),
       backgroundColor: const Color(0xfff1eff6),
@@ -31,8 +39,41 @@ class InicioDocentes extends StatelessWidget {
                     horizontal: ScreenUtil().setWidth(10),
                   ),
                   child: Row(children: [
-                    const CircleAvatar(
-                      backgroundColor: Colors.teal,
+                    CircleAvatar(
+                      radius: responsive.ip(2),
+                      child: ClipOval(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: CachedNetworkImage(
+                            placeholder: (context, url) => const SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: Image(image: AssetImage('assets/img/profile.png'), fit: BoxFit.cover),
+                            ),
+                            errorWidget: (context, url, error) => SizedBox(
+                              child: SizedBox(
+                                child: Image.asset(
+                                  'assets/img/profile.png',
+                                  fit: BoxFit.cover,
+                                  width: ScreenUtil().setWidth(150),
+                                  height: ScreenUtil().setHeight(150),
+                                ),
+                              ),
+                            ),
+                            imageUrl: '${prefs.image}}',
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                //border: Border.all(color: Colors.red, width: ScreenUtil().setWidth(3)),
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                     const Spacer(),
                     const Icon(Fontisto.search),
@@ -44,7 +85,7 @@ class InicioDocentes extends StatelessWidget {
                     horizontal: ScreenUtil().setWidth(10),
                   ),
                   child: Text(
-                    'Bienvenido, Carlos',
+                    'Bienvenido, ${prefs.personName}',
                     style: TextStyle(
                       fontSize: ScreenUtil().setSp(20),
                       color: const Color(0xff323a54),
@@ -52,7 +93,7 @@ class InicioDocentes extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
+                /*  Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: ScreenUtil().setWidth(10),
                   ),
@@ -64,7 +105,7 @@ class InicioDocentes extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
+                ), */
                 SizedBox(
                   height: ScreenUtil().setHeight(10),
                 ),
