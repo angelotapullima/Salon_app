@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:salon_app/src/models/citaciones_padres.dart';
-import 'package:salon_app/src/pages/padres/Citaciones/citaciones_detail.dart';
+import 'package:salon_app/src/models/actividades_model.dart';
+import 'package:salon_app/src/pages/actividades/actividades_detail.dart';
 
-class CitacionesContent extends StatelessWidget {
-  const CitacionesContent({
+class ActividadesContent extends StatelessWidget {
+  const ActividadesContent({
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +16,7 @@ class CitacionesContent extends StatelessWidget {
         padding: EdgeInsets.only(
           top: ScreenUtil().setHeight(15),
         ),
-        itemCount: listCitaciones.length,
+        itemCount: listActividades.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Padding(
@@ -35,7 +34,7 @@ class CitacionesContent extends StatelessWidget {
                       vertical: ScreenUtil().setWidth(5),
                     ),
                     child: Text(
-                      '${listCitaciones[index].fecha}',
+                      '${listActividades[index].fecha}',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: ScreenUtil().setSp(16),
@@ -51,7 +50,7 @@ class CitacionesContent extends StatelessWidget {
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: const ClampingScrollPhysics(),
-                      itemCount: listCitaciones[index].lista!.length,
+                      itemCount: listActividades[index].lista!.length,
                       itemBuilder: (context, index2) {
                         return InkWell(
                           onTap: () {
@@ -61,8 +60,8 @@ class CitacionesContent extends StatelessWidget {
                                 opaque: false,
                                 transitionDuration: const Duration(milliseconds: 400),
                                 pageBuilder: (context, animation, secondaryAnimation) {
-                                  return CitacionesDetail(
-                                    incidencias: listCitaciones[index].lista![index2],
+                                  return ActividadesDetail(
+                                    actividades: listActividades[index].lista![index2],
                                   );
                                 },
                                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -98,13 +97,13 @@ class CitacionesContent extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '${listCitaciones[index].lista![index2].titulo}',
+                                  '${listActividades[index].lista![index2].titulo}',
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  '${listCitaciones[index].lista![index2].horaDuracion}',
+                                  '${listActividades[index].lista![index2].hora}',
                                   style: const TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.bold,
@@ -125,7 +124,7 @@ class CitacionesContent extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Text(
-                                        '  ${listCitaciones[index].lista![index2].personaRegistro} ',
+                                        '  ${listActividades[index].lista![index2].personaRegistro} ',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
@@ -135,26 +134,9 @@ class CitacionesContent extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    const Icon(EvilIcons.location),
-                                    SizedBox(
-                                      width: ScreenUtil().setWidth(2),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '${listCitaciones[index].lista![index2].ubicacion} ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.green,
-                                          fontSize: ScreenUtil().setSp(13.5),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                
                                 Text(
-                                  '${listCitaciones[index].lista![index2].detalle}',
+                                  '${listActividades[index].lista![index2].detalle}',
                                   maxLines: 4,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(

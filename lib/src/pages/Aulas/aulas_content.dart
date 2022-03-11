@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/models/salon_tutor_model.dart';
-import 'package:salon_app/src/pages/tutores/Aulas/details_salon.dart';
+
+import 'details_salon.dart'; 
 
 class AulasTutores extends StatelessWidget {
   final String valor;
