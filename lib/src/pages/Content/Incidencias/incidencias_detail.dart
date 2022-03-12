@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:salon_app/src/models/incidencias_padres.dart';
+import 'package:salon_app/src/models/aviso_model.dart'; 
 
 class IncidenciasDetail extends StatefulWidget {
-  final IncidenciasPadres incidencias;
-  const IncidenciasDetail({Key? key, required this.incidencias}) : super(key: key);
+  final AvisoModel aviso;
+  const IncidenciasDetail({Key? key, required this.aviso}) : super(key: key);
 
   @override
   State<IncidenciasDetail> createState() => _IncidenciasDetailState();
@@ -45,7 +45,7 @@ class _IncidenciasDetailState extends State<IncidenciasDetail> {
                         children: [
                           Expanded(
                             child: Text(
-                              '${widget.incidencias.titulo}',
+                              '${widget.aviso.tipoAvisoNombre}',
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontSize: ScreenUtil().setSp(18),
@@ -56,7 +56,7 @@ class _IncidenciasDetailState extends State<IncidenciasDetail> {
                           ),
                           SizedBox(width: ScreenUtil().setWidth(10)),
                           Text(
-                            '${widget.incidencias.fecha}',
+                            '${widget.aviso.avisoFechaPactada}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: ScreenUtil().setSp(16),
@@ -68,7 +68,7 @@ class _IncidenciasDetailState extends State<IncidenciasDetail> {
                       ),
                     ),
                   ),
-                  Padding(
+                 /*  Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: ScreenUtil().setWidth(12),
                     ),
@@ -94,7 +94,7 @@ class _IncidenciasDetailState extends State<IncidenciasDetail> {
                         ),
                       ],
                     ),
-                  ),
+                  ), */
                    SizedBox(
                     height: ScreenUtil().setHeight(24),
                   ),
@@ -103,7 +103,7 @@ class _IncidenciasDetailState extends State<IncidenciasDetail> {
                       horizontal: ScreenUtil().setWidth(12),
                     ),
                     child: Text(
-                      '${widget.incidencias.detalle}',
+                      '${widget.aviso.avisoMensaje}',
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontSize: ScreenUtil().setSp(14),

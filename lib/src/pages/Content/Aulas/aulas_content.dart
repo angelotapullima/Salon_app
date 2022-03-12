@@ -6,9 +6,9 @@ import 'package:salon_app/src/models/salon_tutor_model.dart';
 
 import 'details_salon.dart';
 
-class AulasTutores extends StatelessWidget {
+class Aulas extends StatelessWidget {
   final String valor;
-  const AulasTutores({Key? key, required this.valor}) : super(key: key);
+  const Aulas({Key? key, required this.valor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

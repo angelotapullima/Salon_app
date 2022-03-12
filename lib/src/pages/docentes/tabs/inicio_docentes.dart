@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:salon_app/src/pages/Aulas/aulas_content.dart';
-import 'package:salon_app/src/pages/Citaciones/citaciones_content.dart';
-import 'package:salon_app/src/pages/actividades/actividades_content.dart';
+import 'package:salon_app/src/pages/Content/Aulas/aulas_content.dart';
+import 'package:salon_app/src/pages/Content/Citaciones/citaciones_content.dart';
+import 'package:salon_app/src/pages/Content/actividades/actividades_content.dart';
 import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 import 'package:salon_app/src/utils/colors.dart';
 import 'package:salon_app/src/utils/responsive.dart';
@@ -122,7 +122,7 @@ class InicioDocentes extends StatelessWidget {
                       ),
                     ),
                     child: (_controller.valueBoton == 1)
-                        ? const AulasTutores(valor: '2')
+                        ? const Aulas(valor: '2')
                         : (_controller.valueBoton == 2)
                             ? const CitacionesContent()
                             : const ActividadesContent(),

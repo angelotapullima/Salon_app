@@ -35,7 +35,11 @@ class _SplashState extends State<Splash> {
         children: [
           const SizedBox.expand(),
           Center(
-            child: SizedBox(width: ScreenUtil().setWidth(350), height: ScreenUtil().setHeight(350), child: const FlutterLogo()),
+            child: SizedBox(
+              width: ScreenUtil().setWidth(350),
+              height: ScreenUtil().setHeight(350),
+              child: const FlutterLogo(),
+            ),
           ),
         ],
       ),

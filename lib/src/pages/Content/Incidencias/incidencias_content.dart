@@ -1,31 +1,32 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/models/aviso_model.dart';
-import 'package:salon_app/src/pages/actividades/actividades_detail.dart';
-import 'package:salon_app/src/utils/responsive.dart';
+import 'package:salon_app/src/pages/Content/Incidencias/incidencias_detail.dart';
+import 'package:salon_app/src/utils/responsive.dart'; 
 
-class ActividadesContent extends StatelessWidget {
-  const ActividadesContent({
+class IncideciasContent extends StatelessWidget {
+  const IncideciasContent({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-   final avisosBloc = ProviderBloc.citaciones(context);
-    avisosBloc.getActividades('2');
+    final incidenciasBloc = ProviderBloc.citaciones(context);
+    incidenciasBloc.getIncidencias('3');
     return SafeArea(
       child: StreamBuilder(
-        stream: avisosBloc.actividadesStream,
+        stream: incidenciasBloc.incidenciasStream,
         builder: (context, AsyncSnapshot<List<FechaAvisosModel>> alertas) {
           if (alertas.hasData) {
             if (alertas.data!.isNotEmpty) {
-              return _itemFechaActividases(context, alertas.data!);
+              return _itemFechaAlert(context, alertas.data!);
             } else {
               return const Center(
-                child: Text('No tiene ninguna Actividad'),
+                child: Text('No tiene ninguna citación'),
               );
             }
           } else {
@@ -38,7 +39,7 @@ class ActividadesContent extends StatelessWidget {
     );
   }
 
-  Widget _itemFechaActividases(BuildContext context, List<FechaAvisosModel> fechas) {
+  Widget _itemFechaAlert(BuildContext context, List<FechaAvisosModel> fechas) {
     final responsive = Responsive.of(context);
 
     return ListView.builder(
@@ -94,7 +95,7 @@ class ActividadesContent extends StatelessWidget {
                           crossAxisSpacing: responsive.wp(5),
                         ), */
                         itemBuilder: (context, i) {
-                          return _itemActividades(context, fechas[y].citaciones![i], responsive);
+                          return _itemCitaciones(context, fechas[y].citaciones![i], responsive);
                         },
                       ),
                     ),
@@ -109,16 +110,16 @@ class ActividadesContent extends StatelessWidget {
     );
   }
 
-  Widget _itemActividades(BuildContext context, AvisoModel aviso, Responsive responsive) {
+  Widget _itemCitaciones(BuildContext context, AvisoModel aviso, Responsive responsive) {
     return InkWell(
       onTap: () {
-       Navigator.push(
+        Navigator.push(
           context,
           PageRouteBuilder(
             opaque: false,
             transitionDuration: const Duration(milliseconds: 400),
             pageBuilder: (context, animation, secondaryAnimation) {
-              return ActividadesDetail(aviso: aviso);
+              return IncidenciasDetail(aviso: aviso);
             },
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return FadeTransition(
@@ -127,7 +128,7 @@ class ActividadesContent extends StatelessWidget {
               );
             },
           ),
-        );  
+        );
       },
       child: Container(
           padding: EdgeInsets.symmetric(

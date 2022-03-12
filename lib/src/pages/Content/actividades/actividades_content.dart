@@ -4,28 +4,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/models/aviso_model.dart';
-import 'package:salon_app/src/pages/Citaciones/citaciones_detail.dart';
+import 'package:salon_app/src/pages/Content/actividades/actividades_detail.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 
-class CitacionesContent extends StatelessWidget {
-  const CitacionesContent({
+class ActividadesContent extends StatelessWidget {
+  const ActividadesContent({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final citacionesBloc = ProviderBloc.citaciones(context);
-    citacionesBloc.getCitaciones('1');
+   final avisosBloc = ProviderBloc.citaciones(context);
+    avisosBloc.getActividades('2');
     return SafeArea(
       child: StreamBuilder(
-        stream: citacionesBloc.citacionesStream,
+        stream: avisosBloc.actividadesStream,
         builder: (context, AsyncSnapshot<List<FechaAvisosModel>> alertas) {
           if (alertas.hasData) {
             if (alertas.data!.isNotEmpty) {
-              return _itemFechaAlert(context, alertas.data!);
+              return _itemFechaActividases(context, alertas.data!);
             } else {
               return const Center(
-                child: Text('No tiene ninguna citación'),
+                child: Text('No tiene ninguna Actividad'),
               );
             }
           } else {
@@ -38,7 +38,7 @@ class CitacionesContent extends StatelessWidget {
     );
   }
 
-  Widget _itemFechaAlert(BuildContext context, List<FechaAvisosModel> fechas) {
+  Widget _itemFechaActividases(BuildContext context, List<FechaAvisosModel> fechas) {
     final responsive = Responsive.of(context);
 
     return ListView.builder(
@@ -94,7 +94,7 @@ class CitacionesContent extends StatelessWidget {
                           crossAxisSpacing: responsive.wp(5),
                         ), */
                         itemBuilder: (context, i) {
-                          return _itemCitaciones(context, fechas[y].citaciones![i], responsive);
+                          return _itemActividades(context, fechas[y].citaciones![i], responsive);
                         },
                       ),
                     ),
@@ -109,16 +109,16 @@ class CitacionesContent extends StatelessWidget {
     );
   }
 
-  Widget _itemCitaciones(BuildContext context, AvisoModel aviso, Responsive responsive) {
+  Widget _itemActividades(BuildContext context, AvisoModel aviso, Responsive responsive) {
     return InkWell(
       onTap: () {
-        Navigator.push(
+       Navigator.push(
           context,
           PageRouteBuilder(
             opaque: false,
             transitionDuration: const Duration(milliseconds: 400),
             pageBuilder: (context, animation, secondaryAnimation) {
-              return CitacionesDetail(aviso: aviso);
+              return ActividadesDetail(aviso: aviso);
             },
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return FadeTransition(
@@ -127,7 +127,7 @@ class CitacionesContent extends StatelessWidget {
               );
             },
           ),
-        );
+        );  
       },
       child: Container(
           padding: EdgeInsets.symmetric(

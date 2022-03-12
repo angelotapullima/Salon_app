@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:salon_app/src/pages/Aulas/aulas_content.dart';
-import 'package:salon_app/src/pages/Incidencias/incidencias_content.dart';
+import 'package:google_fonts/google_fonts.dart'; 
+import 'package:salon_app/src/pages/Content/Aulas/aulas_content.dart';
+import 'package:salon_app/src/pages/Content/Incidencias/incidencias_content.dart'; 
 import 'package:salon_app/src/utils/colors.dart';
 
 class InicioTurores extends StatelessWidget {
@@ -76,7 +76,7 @@ class InicioTurores extends StatelessWidget {
                           topRight: Radius.circular(40),
                         ),
                       ),
-                      child: (_controller.valueBoton == 1) ? const AulasTutores(valor:'1') : const IncideciasContent(),
+                      child: (_controller.valueBoton == 1) ? const Aulas(valor:'1') : const IncideciasContent(),
                     ),
                   ),
                 )

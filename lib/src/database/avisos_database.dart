@@ -58,10 +58,10 @@ class AvisosDatabase {
   }
 
 
-  deleteCategoria() async {
+  deleteAviso() async {
     final db = await dbprovider.database;
 
-    final res = await db.rawDelete("DELETE FROM Alumno");
+    final res = await db.rawDelete("DELETE FROM Aviso");
 
     return res;
   }

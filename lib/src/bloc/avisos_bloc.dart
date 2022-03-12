@@ -15,11 +15,20 @@ class AvisosBloc {
   final _actividadesController = BehaviorSubject<List<FechaAvisosModel>>();
   Stream<List<FechaAvisosModel>> get actividadesStream => _actividadesController.stream;
 
+  final _incidenciasController = BehaviorSubject<List<FechaAvisosModel>>();
+  Stream<List<FechaAvisosModel>> get incidenciasStream => _incidenciasController.stream;
+
   dispose() {
     _citacionesController.close();
     _actividadesController.close();
+    _incidenciasController.close();
   }
 
+  void getIncidencias(String tipoAviso) async {
+    _incidenciasController.sink.add(await getAvisosDate(tipoAviso));
+    await avisoApi.getAvisos();
+    _incidenciasController.sink.add(await getAvisosDate(tipoAviso));
+  }
 
   void getActividades(String tipoAviso) async {
     _actividadesController.sink.add(await getAvisosDate(tipoAviso));
@@ -37,8 +46,15 @@ class AvisosBloc {
     final List<FechaAvisosModel> listaReturn = [];
     final List<String> listDates = [];
 
+    String fecha = '';
     var now = DateTime.now();
-    String fecha = "${now.year.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
+
+    if (tipoAviso == '3') {
+      var nuevaNow = now.subtract(const Duration(days: 7));
+      fecha = "${nuevaNow.year.toString().padLeft(2, '0')}-${nuevaNow.month.toString().padLeft(2, '0')}-${nuevaNow.day.toString().padLeft(2, '0')}";
+    } else {
+      fecha = "${now.year.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
+    }
 
     final fechasAlertas = await avisosDatabase.getAvisos(fecha, tipoAviso);
 
@@ -55,7 +71,7 @@ class AvisosBloc {
         FechaAvisosModel fechaAlertModel = FechaAvisosModel();
         fechaAlertModel.fecha = obtenerFecha(listDates[x].toString());
 
-        final fechix = await avisosDatabase.getAvisoByFecha(listDates[x].toString(), '1');
+        final fechix = await avisosDatabase.getAvisoByFecha(listDates[x].toString(), tipoAviso);
 
         if (fechix.isNotEmpty) {
           for (var y = 0; y < fechix.length; y++) {
@@ -115,7 +131,7 @@ class AvisosBloc {
         }
       }
     }
-
+    print('ffv');
     return listaReturn;
   }
 }

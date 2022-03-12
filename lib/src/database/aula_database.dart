@@ -54,7 +54,7 @@ class AulaDatabase {
     }
   }
 
-   */deleteCategoria() async {
+   */deleteAula() async {
     final db = await dbprovider.database;
 
     final res = await db.rawDelete("DELETE FROM Aula");
