@@ -5,31 +5,42 @@ import 'package:salon_app/src/database/avisos_database.dart';
 import 'package:salon_app/src/models/aviso_model.dart';
 import 'package:salon_app/src/utils/utils.dart';
 
-class CitacionesBloc {
+class AvisosBloc {
   final avisosDatabase = AvisosDatabase();
   final avisoApi = AvisoApi();
-  final _citacionesControllerController = BehaviorSubject<List<CitacionesMoldel>>();
 
-  Stream<List<CitacionesMoldel>> get citacionesStream => _citacionesControllerController.stream;
+  final _citacionesController = BehaviorSubject<List<FechaAvisosModel>>();
+  Stream<List<FechaAvisosModel>> get citacionesStream => _citacionesController.stream;
+
+  final _actividadesController = BehaviorSubject<List<FechaAvisosModel>>();
+  Stream<List<FechaAvisosModel>> get actividadesStream => _actividadesController.stream;
 
   dispose() {
-    _citacionesControllerController.close();
+    _citacionesController.close();
+    _actividadesController.close();
   }
 
-  void getCitaciones() async {
-    _citacionesControllerController.sink.add(await getCitacionesDate());
+
+  void getActividades(String tipoAviso) async {
+    _actividadesController.sink.add(await getAvisosDate(tipoAviso));
     await avisoApi.getAvisos();
-    _citacionesControllerController.sink.add(await getCitacionesDate());
+    _actividadesController.sink.add(await getAvisosDate(tipoAviso));
   }
 
-  Future<List<CitacionesMoldel>> getCitacionesDate() async {
-    final List<CitacionesMoldel> listaReturn = [];
+  void getCitaciones(String tipoAviso) async {
+    _citacionesController.sink.add(await getAvisosDate(tipoAviso));
+    await avisoApi.getAvisos();
+    _citacionesController.sink.add(await getAvisosDate(tipoAviso));
+  }
+
+  Future<List<FechaAvisosModel>> getAvisosDate(String tipoAviso) async {
+    final List<FechaAvisosModel> listaReturn = [];
     final List<String> listDates = [];
 
     var now = DateTime.now();
     String fecha = "${now.year.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
 
-    final fechasAlertas = await avisosDatabase.getCitaciones(fecha);
+    final fechasAlertas = await avisosDatabase.getAvisos(fecha, tipoAviso);
 
     if (fechasAlertas.isNotEmpty) {
       for (var i = 0; i < fechasAlertas.length; i++) {
@@ -41,7 +52,7 @@ class CitacionesBloc {
       for (var x = 0; x < listDates.length; x++) {
         final List<AvisoModel> alertSubList = [];
         //final List<String> horitas = [];
-        CitacionesMoldel fechaAlertModel = CitacionesMoldel();
+        FechaAvisosModel fechaAlertModel = FechaAvisosModel();
         fechaAlertModel.fecha = obtenerFecha(listDates[x].toString());
 
         final fechix = await avisosDatabase.getAvisoByFecha(listDates[x].toString(), '1');

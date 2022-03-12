@@ -23,12 +23,12 @@ class AvisosDatabase {
   }
 
   //citaciones => IdTipoAviso = 1
-  Future<List<AvisoModel>> getCitaciones( String date) async {
+  Future<List<AvisoModel>> getAvisos( String date,String tipoAviso) async {
     try {
       final Database db = await dbprovider.getDatabase();
       List<AvisoModel> list = [];
       List<Map> maps =
-          await db.rawQuery("SELECT * FROM Aviso where IdTipoAviso = '1' and date(avisoFechaPactada) >= '$date' group by avisoFechaPactada ");
+          await db.rawQuery("SELECT * FROM Aviso where IdTipoAviso = '$tipoAviso' and date(avisoFechaPactada) >= '$date' group by avisoFechaPactada ");
 
       if (maps.isNotEmpty) list = AvisoModel.fromJsonList(maps);
       return list;

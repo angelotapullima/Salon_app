@@ -15,28 +15,30 @@ class CitacionesContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final citacionesBloc = ProviderBloc.citaciones(context);
-    citacionesBloc.getCitaciones();
+    citacionesBloc.getCitaciones('1');
     return SafeArea(
       child: StreamBuilder(
         stream: citacionesBloc.citacionesStream,
-        builder: (context, AsyncSnapshot<List<CitacionesMoldel>> alertas) {
+        builder: (context, AsyncSnapshot<List<FechaAvisosModel>> alertas) {
           if (alertas.hasData) {
             if (alertas.data!.isNotEmpty) {
               return _itemFechaAlert(context, alertas.data!);
             } else {
               return const Center(
-                child: Text('No tiene ningún pendiente para hoy en la agenda'),
+                child: Text('No tiene ninguna citación'),
               );
             }
           } else {
-            return const Center(child: CupertinoActivityIndicator());
+            return const Center(
+              child: CupertinoActivityIndicator(),
+            );
           }
         },
       ),
     );
   }
 
-  Widget _itemFechaAlert(BuildContext context, List<CitacionesMoldel> fechas) {
+  Widget _itemFechaAlert(BuildContext context, List<FechaAvisosModel> fechas) {
     final responsive = Responsive.of(context);
 
     return ListView.builder(

@@ -83,11 +83,11 @@ class AvisoModel {
 
 
 
-class CitacionesMoldel {
+class FechaAvisosModel {
   String? fecha;
   List<AvisoModel>? citaciones;
 
-  CitacionesMoldel({
+  FechaAvisosModel({
     this.fecha,
     this.citaciones,
   });
