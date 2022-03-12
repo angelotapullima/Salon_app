@@ -9,10 +9,11 @@ class DatabaseHelper {
   Future<Database> get database async => _database ??= await getDatabase();
 
   Future<Database> getDatabase() async {
-    final String path = join(await getDatabasesPath(), 'salongrrry.db');
+    final String path = join(await getDatabasesPath(), 'salon4.db');
     return openDatabase(path, onCreate: (db, version) {
       db.execute(tableAulaSql);
       db.execute(tableAlumnosSql);
+      db.execute(tableAvisosSql);
     }, version: 1, onDowngrade: onDatabaseDowngradeDelete);
   }
 
@@ -33,4 +34,23 @@ class DatabaseHelper {
       ' alumnoTelefono TEXT,'
       ' alumnoEmail TEXT,'
       ' alumnoEstado TEXT)';
+
+  static const String tableAvisosSql = 'CREATE TABLE Aviso('
+      ' idAviso TEXT PRIMARY KEY,'
+      ' idAula TEXT,'
+      ' idAlumno TEXT,'
+      ' idResponsable TEXT,'
+      ' idTipoAviso TEXT,'
+      ' avisoMensaje TEXT,'
+      ' avisoFechaPactada TEXT,'
+      ' avisoHoraPactada TEXT,'
+      ' avisoFechaCreacion TEXT,'
+      ' aulaGrado TEXT,'
+      ' aulaSeccion TEXT,'
+      ' aulaNivel TEXT,'
+      ' aulaEstado TEXT,'
+      ' tipoAvisoNombre TEXT,'
+      ' personaNombre TEXT,'
+      ' personApellidoPaterno TEXT,'
+      ' personaApellidoMaterno TEXT)';
 }

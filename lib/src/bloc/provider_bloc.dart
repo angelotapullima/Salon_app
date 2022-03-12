@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:salon_app/src/bloc/alumnos_bloc.dart';
 import 'package:salon_app/src/bloc/aula_bloc.dart';
 import 'package:salon_app/src/bloc/bottom_navigation_bloc.dart';
+import 'package:salon_app/src/bloc/citaciones_bloc.dart';
 
 class ProviderBloc extends InheritedWidget {
   final bottonBloc = BottomNaviBloc();
   final aulaBloc = AulaBloc();
   final alumnosBloc = AlumnosBloc();
-  
+  final citacionesBloc = CitacionesBloc();
+
   ProviderBloc({Key? key, required Widget child}) : super(key: key, child: child);
 
   @override
   bool updateShouldNotify(ProviderBloc oldWidget) => true;
-
 
   static BottomNaviBloc botton(BuildContext context) {
     return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>())!.bottonBloc;
@@ -26,4 +27,7 @@ class ProviderBloc extends InheritedWidget {
     return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>())!.alumnosBloc;
   }
 
+  static CitacionesBloc citaciones(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>())!.citacionesBloc;
+  }
 }

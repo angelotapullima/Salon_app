@@ -38,23 +38,7 @@ class AlumnoDatabase {
     }
   }
 
-  /* 
 
-  Future<List<CategoriaModel>> getCategoriaById(String idCategoria) async {
-    try {
-      final Database db = await dbprovider.getDatabase();
-      List<CategoriaModel> list = [];
-      List<Map> maps = await db.rawQuery("SELECT * FROM Categoria WHERE idCategoria='$idCategoria' AND estadoCategoria = '1' ");
-
-      if (maps.length > 0) list = CategoriaModel.fromJsonList(maps);
-      return list;
-    } catch (e) {
-      print(" $e Error en la  tabla Categoria");
-      return [];
-    }
-  }
-
-   */
   deleteCategoria() async {
     final db = await dbprovider.database;
 

@@ -53,6 +53,7 @@ dependencies:
   focused_menu: ^1.0.5
   keyboard_actions: ^3.4.7
   cached_network_image: ^3.2.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -80,8 +81,6 @@ flutter:
 
   assets:
     - assets/img/
-    - assets/svg/
-    - assets/Json/
     
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/models/salon_tutor_model.dart';
 
-import 'details_salon.dart'; 
+import 'details_salon.dart';
 
 class AulasTutores extends StatelessWidget {
   final String valor;
@@ -32,7 +32,6 @@ class AulasTutores extends StatelessWidget {
                 physics: const ClampingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 1,
-                  /*  */
                   crossAxisCount: 3,
                   mainAxisSpacing: ScreenUtil().setHeight(10),
                   crossAxisSpacing: ScreenUtil().setWidth(5),

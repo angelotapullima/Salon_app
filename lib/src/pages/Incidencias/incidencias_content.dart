@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/models/incidencias_padres.dart';
-import 'package:salon_app/src/pages/padres/incidencias/incidencias_detail.dart';
+import 'package:salon_app/src/pages/Incidencias/incidencias_detail.dart';
 
 class IncideciasContent extends StatelessWidget {
   const IncideciasContent({

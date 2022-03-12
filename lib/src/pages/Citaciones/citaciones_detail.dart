@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:salon_app/src/models/citaciones_padres.dart';
+import 'package:salon_app/src/models/aviso_model.dart';
+import 'package:salon_app/src/utils/utils.dart';
 
 class CitacionesDetail extends StatefulWidget {
-  final CitacionesPadres incidencias;
-  const CitacionesDetail({Key? key, required this.incidencias}) : super(key: key);
+  final AvisoModel aviso;
+  const CitacionesDetail({Key? key, required this.aviso}) : super(key: key);
 
   @override
   State<CitacionesDetail> createState() => _CitacionesDetailState();
@@ -48,7 +49,7 @@ class _CitacionesDetailState extends State<CitacionesDetail> {
                           children: [
                             Expanded(
                               child: Text(
-                                '${widget.incidencias.titulo}',
+                                '${widget.aviso.aulaGrado} ${widget.aviso.aulaSeccion} - ${widget.aviso.aulaNivel}',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontSize: ScreenUtil().setSp(18),
@@ -59,7 +60,7 @@ class _CitacionesDetailState extends State<CitacionesDetail> {
                             ),
                             SizedBox(width: ScreenUtil().setWidth(10)),
                             Text(
-                              '${widget.incidencias.fecha}',
+                              '${obtenerFecha('${widget.aviso.avisoFechaPactada}')}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: ScreenUtil().setSp(14),
@@ -76,7 +77,7 @@ class _CitacionesDetailState extends State<CitacionesDetail> {
                         horizontal: ScreenUtil().setWidth(12),
                       ),
                       child: Text(
-                        '${widget.incidencias.horaDuracion}',
+                        '${widget.aviso.avisoHoraPactada}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: ScreenUtil().setSp(18),
@@ -93,7 +94,7 @@ class _CitacionesDetailState extends State<CitacionesDetail> {
                         horizontal: ScreenUtil().setWidth(12),
                       ),
                       child: Text(
-                        '${widget.incidencias.detalle}',
+                        '${widget.aviso.avisoMensaje}',
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: ScreenUtil().setSp(14),
@@ -144,15 +145,6 @@ class _CitacionesDetailState extends State<CitacionesDetail> {
                           SizedBox(
                             width: ScreenUtil().setWidth(5),
                           ),
-                          Text(
-                            '${widget.incidencias.ubicacion}',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: ScreenUtil().setSp(14),
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black,
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -169,21 +161,6 @@ class _CitacionesDetailState extends State<CitacionesDetail> {
                         style: TextStyle(
                           fontSize: ScreenUtil().setSp(18),
                           fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                     
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setWidth(12),
-                      ),
-                      child: Text(
-                        '${widget.incidencias.personaRegistro}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: ScreenUtil().setSp(14),
-                          fontWeight: FontWeight.w500,
                           color: Colors.black,
                         ),
                       ),
