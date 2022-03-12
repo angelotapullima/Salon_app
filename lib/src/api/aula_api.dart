@@ -13,33 +13,7 @@ class AulaApi {
   final aulaDatabase = AulaDatabase();
   final alumnoDatabase = AlumnoDatabase();
   final prefs = Preferences();
-  Future<bool> saveAlert(AulaModel aulaModel) async {
-    try {
-      final url = Uri.parse('$apiBaseURL/api/Productos/guardar_alerta');
-
-      final resp = await http.post(url, body: {
-        'tn': 'token',
-        'app': 'true',
-        'alerta_estado': '1',
-      });
-
-      if (resp.statusCode == 200) {
-        if (kDebugMode) {
-          print(resp.body.toString());
-        }
-
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
-      return false;
-    }
-  }
-
+  
   Future<void> getAulas() async {
     try {
       final url = Uri.parse('$apiBaseURL/api/aviso/listar_aulas_responsable');
@@ -58,7 +32,7 @@ class AulaApi {
         aulaModel.aulaGrado = decodedData['result']['aulas'][i]['aula_grado'];
         aulaModel.aulaSeccion = decodedData['result']['aulas'][i]['aula_seccion'];
         aulaModel.aulaNivel = decodedData['result']['aulas'][i]['aula_nivel'];
-        aulaModel.aulaEstado = decodedData['result']['aulas'][i]['aula_estado'];
+        aulaModel.aulaEstado = decodedData['result']['aulas'][i]['aula_responsable_estado'];
         await aulaDatabase.insertarAula(aulaModel);
 
         var alumns = decodedData['result']['aulas'][i]['alumnos'];

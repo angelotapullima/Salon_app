@@ -26,11 +26,10 @@ class AvisoApi {
 
         var fecha = '';
         var hora = '';
-        if (decodedData['result']['avisos'][i]['id_tipo_aviso'] == '1') {
-          final fechaFormat = decodedData['result']['avisos'][i]['aviso_fecha_pactada'].split(" ");
-          fecha = fechaFormat[0];
-          hora = fechaFormat[1];
-        }
+
+        final fechaFormat = decodedData['result']['avisos'][i]['aviso_fecha_pactada'].split(" ");
+        fecha = fechaFormat[0];
+        hora = fechaFormat[1];
 
         avisoModel.idAviso = decodedData['result']['avisos'][i]['id_aviso'].toString();
         avisoModel.idAula = decodedData['result']['avisos'][i]['id_aula'].toString();

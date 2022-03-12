@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:salon_app/src/models/actividades_model.dart';
+import 'package:salon_app/src/models/aviso_model.dart';
+import 'package:salon_app/src/utils/utils.dart';
 
 class ActividadesDetail extends StatefulWidget {
-  final ActividadesPadres actividades;
-  const ActividadesDetail({Key? key, required this.actividades}) : super(key: key);
+  final AvisoModel aviso;
+  const ActividadesDetail({Key? key, required this.aviso}) : super(key: key);
 
   @override
   State<ActividadesDetail> createState() => _ActividadesDetailState();
@@ -47,7 +48,7 @@ class _ActividadesDetailState extends State<ActividadesDetail> {
                           children: [
                             Expanded(
                               child: Text(
-                                '${widget.actividades.titulo}',
+                                '${widget.aviso.tipoAvisoNombre}',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontSize: ScreenUtil().setSp(18),
@@ -58,7 +59,7 @@ class _ActividadesDetailState extends State<ActividadesDetail> {
                             ),
                             SizedBox(width: ScreenUtil().setWidth(10)),
                             Text(
-                              '${widget.actividades.fecha}',
+                              '${obtenerFecha('${widget.aviso.avisoFechaPactada}')}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: ScreenUtil().setSp(14),
@@ -75,7 +76,7 @@ class _ActividadesDetailState extends State<ActividadesDetail> {
                         horizontal: ScreenUtil().setWidth(12),
                       ),
                       child: Text(
-                        '${widget.actividades.hora}',
+                        '${widget.aviso.avisoHoraPactada}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: ScreenUtil().setSp(18),
@@ -92,7 +93,7 @@ class _ActividadesDetailState extends State<ActividadesDetail> {
                         horizontal: ScreenUtil().setWidth(12),
                       ),
                       child: Text(
-                        '${widget.actividades.detalle}',
+                        '${widget.aviso.avisoMensaje}',
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: ScreenUtil().setSp(14),
@@ -125,7 +126,7 @@ class _ActividadesDetailState extends State<ActividadesDetail> {
                         ),
                       ),
                     ),
-                    Padding(
+                    /* Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: ScreenUtil().setWidth(12),
                       ),
@@ -138,7 +139,7 @@ class _ActividadesDetailState extends State<ActividadesDetail> {
                           color: Colors.black,
                         ),
                       ),
-                    ),
+                    ), */
                   ],
                 ),
               ),
