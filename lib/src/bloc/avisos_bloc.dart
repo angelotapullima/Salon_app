@@ -133,9 +133,7 @@ class AvisosBloc {
         }
       }
     }
-    if (kDebugMode) {
-      print('ffv');
-    }
+    
     return listaReturn;
   }
 }

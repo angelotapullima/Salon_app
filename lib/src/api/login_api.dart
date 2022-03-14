@@ -29,30 +29,17 @@ class LoginApi {
         if (kDebugMode) {
           print('code suscessfull');
         }
-        //------------------------------------------------------------------------
-        //Agregar idUser BufiPay, para poder hacer
-        //prefsBufiPaymets.idUserBufiPay = decodedData['data']['id_bufipay'];
-        //------------------------------------------------------------------------
+       
         prefs.idUsers = decodedData['data']['c_u'];
-
         prefs.userNicknames = decodedData['data']['_n'];
         prefs.userEmails = decodedData['data']['u_e'];
         prefs.images = decodedData['data']['u_i'];
         prefs.personNames = decodedData['data']['p_n'];
         prefs.personSurnames = '${decodedData['data']['p_p']} ${decodedData['data']['p_m']}';
-
-        /* prefs.personAddresss = decodedData['data']['p_d'];
-        prefs.personGenres = decodedData['data']['p_s'];
-        prefs.personNacionalidads = decodedData['data']['p_na']; */
         prefs.idRols = decodedData['data']['ru'];
         prefs.rolNombres = decodedData['data']['rn'];
         prefs.tokens = decodedData['data']['tn'];
-       /*  prefs.tokenFirebases = decodedData['data']['u_tk'];
-        prefs.personNumberPhones = (decodedData['data']['p_t'] == null) ? '' : decodedData['data']['p_t'];
-        prefs.personBirths = (decodedData['data']['p_nac'] == null) ? '' : decodedData['data']['p_nac']; */
-        //prefs.passwords = pass;
-
-        //prefs.tieneNegocio = decodedData['data']['u_tn'];
+      
 
         return loginModel;
       } else {
