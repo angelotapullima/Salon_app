@@ -9,7 +9,7 @@ class DatabaseHelper {
   Future<Database> get database async => _database ??= await getDatabase();
 
   Future<Database> getDatabase() async {
-    final String path = join(await getDatabasesPath(), 'salon.db');
+    final String path = join(await getDatabasesPath(), 'salonv1.db');
     return openDatabase(path, onCreate: (db, version) {
       db.execute(tableAulaSql);
       db.execute(tableAlumnosSql);
@@ -50,6 +50,7 @@ class DatabaseHelper {
       ' aulaNivel TEXT,'
       ' aulaEstado TEXT,'
       ' tipoAvisoNombre TEXT,'
+      ' avisoTitulo TEXT,'
       ' personaNombre TEXT,'
       ' personApellidoPaterno TEXT,'
       ' personaApellidoMaterno TEXT)';

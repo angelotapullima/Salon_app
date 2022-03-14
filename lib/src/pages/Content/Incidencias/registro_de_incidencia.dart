@@ -2,17 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
-import 'package:platform_date_picker/platform_date_picker.dart';
+import 'package:salon_app/src/api/aviso_api.dart';
+import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/utils/colors.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 import 'package:salon_app/src/utils/utils.dart';
 
 class RegistroDeIncidencia extends StatefulWidget {
+  final String idAula;
+  final String idAlumno;
   final String alumno;
   final String grado;
   final String seccion;
   const RegistroDeIncidencia({
     Key? key,
+    required this.idAula,
+    required this.idAlumno,
     required this.alumno,
     required this.grado,
     required this.seccion,
@@ -24,18 +29,15 @@ class RegistroDeIncidencia extends StatefulWidget {
 
 class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
   final ValueNotifier<bool> _cargando = ValueNotifier(false);
-  String fechaDato = 'Seleccionar';
+
   final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _gradoController = TextEditingController();
   final TextEditingController _seccionController = TextEditingController();
 
-  final TextEditingController _telefonoController = TextEditingController();
-  final TextEditingController _direccionController = TextEditingController();
+  final TextEditingController _tituloController = TextEditingController();
+  final TextEditingController _mensajeController = TextEditingController();
 
-  final FocusNode _focusNombre = FocusNode();
-  final FocusNode _focusNroDoc = FocusNode();
-  final FocusNode _focusCodCliente = FocusNode();
-  final FocusNode _focusTelefono = FocusNode();
+  final FocusNode _focusTitulo = FocusNode();
   final FocusNode _focusDireccion = FocusNode();
 
   @override
@@ -43,8 +45,8 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
     _nombreController.dispose();
     _gradoController.dispose();
     _seccionController.dispose();
-    _telefonoController.dispose();
-    _direccionController.dispose();
+    _tituloController.dispose();
+    _mensajeController.dispose();
     super.dispose();
   }
 
@@ -90,31 +92,7 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                   keyboardBarColor: Colors.white,
                   actions: [
                     KeyboardActionsItem(
-                      focusNode: _focusNombre,
-                      toolbarButtons: [
-                        (node) {
-                          return closeNode(node);
-                        }
-                      ],
-                    ),
-                    KeyboardActionsItem(
-                      focusNode: _focusNroDoc,
-                      toolbarButtons: [
-                        (node) {
-                          return closeNode(node);
-                        }
-                      ],
-                    ),
-                    KeyboardActionsItem(
-                      focusNode: _focusCodCliente,
-                      toolbarButtons: [
-                        (node) {
-                          return closeNode(node);
-                        }
-                      ],
-                    ),
-                    KeyboardActionsItem(
-                      focusNode: _focusTelefono,
+                      focusNode: _focusTitulo,
                       toolbarButtons: [
                         (node) {
                           return closeNode(node);
@@ -143,7 +121,7 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                           height: ScreenUtil().setHeight(25),
                         ),
                         Text(
-                          ' Nombre de cliente',
+                          ' Nombre de Alumno',
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(16),
                             fontWeight: FontWeight.w600,
@@ -155,7 +133,7 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                         ),
                         TextField(
                           controller: _nombreController,
-                          focusNode: _focusNombre,
+                          //focusNode: _focusNombre,
                           readOnly: true,
                           decoration: InputDecoration(
                             filled: true,
@@ -229,7 +207,7 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                               child: SizedBox(
                                 child: TextField(
                                   controller: _gradoController,
-                                  focusNode: _focusNombre,
+                                  //focusNode: _focusNombre,
                                   readOnly: true,
                                   decoration: InputDecoration(
                                     filled: true,
@@ -273,7 +251,7 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                               child: SizedBox(
                                 child: TextField(
                                   controller: _seccionController,
-                                  focusNode: _focusNombre,
+                                  //focusNode: _focusNombre,
                                   readOnly: true,
                                   decoration: InputDecoration(
                                     filled: true,
@@ -315,7 +293,7 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                         SizedBox(
                           height: ScreenUtil().setHeight(20),
                         ),
-                        Text(
+                        /*  Text(
                           ' Fecha de Incidencia',
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(16),
@@ -364,6 +342,7 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                             ),
                           ),
                         ),
+                        */
                         SizedBox(
                           height: ScreenUtil().setHeight(20),
                         ),
@@ -379,8 +358,8 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                           height: ScreenUtil().setHeight(6),
                         ),
                         TextField(
-                          controller: _telefonoController,
-                          focusNode: _focusTelefono,
+                          controller: _tituloController,
+                          focusNode: _focusTitulo,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -418,7 +397,7 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                           height: ScreenUtil().setHeight(20),
                         ),
                         Text(
-                          ' Detalle ',
+                          ' Mensaje ',
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(16),
                             fontWeight: FontWeight.w600,
@@ -430,12 +409,12 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                         ),
                         TextField(
                           maxLines: 3,
-                          controller: _direccionController,
+                          controller: _mensajeController,
                           focusNode: _focusDireccion,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            hintText: 'Detalle ',
+                            hintText: 'Mensaje ',
                             hintStyle: TextStyle(
                               fontSize: ScreenUtil().setSp(14),
                               color: Colors.grey[600],
@@ -474,51 +453,35 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             color: colorPrimary,
                             onPressed: () async {
-                              if (_nombreController.text.isNotEmpty) {
-                                if (valueSexo != 'Seleccionar') {
-                                  if (_telefonoController.text.isNotEmpty) {
-                                    if (fechaDato != 'Seleccionar') {
-                                      if (_direccionController.text.isNotEmpty) {
-                                        /* _cargando.value = true;
-                                            final clienteApi = ClienteApi();
+                              if (_tituloController.text.isNotEmpty) {
+                                if (_mensajeController.text.isNotEmpty) {
+                                  _cargando.value = true;
+                                  final avisoApi = AvisoApi();
 
-                                            ClienteModel clienteModel = ClienteModel();
-                                            clienteModel.nombreCliente = _nombreController.text;
-                                            clienteModel.tipoDocCliente = valueTipoDoc;
-                                            clienteModel.nroDocCliente = _nroDocController.text;
-                                            clienteModel.codigoCliente = _codigoClienteController.text;
-                                            clienteModel.sexoCliente = valueSexo;
-                                            clienteModel.nacimientoCLiente = fechaDato;
-                                            clienteModel.telefonoCliente = _telefonoController.text;
-                                            clienteModel.direccionCliente = _direccionController.text;
+                                  final res = await avisoApi.saveAviso(
+                                    widget.idAula,
+                                    widget.idAlumno,
+                                    '3',
+                                    _mensajeController.text,
+                                    '',
+                                    _tituloController.text,
+                                  );
 
-                                            final res = await clienteApi.saveClient(clienteModel);
-
-                                            if (res.code == '1') {
-                                              showToast2('Cliente agregado correctamente', Colors.green);
-                                              final clienteBloc = ProviderBloc.cliente(context);
-                                              clienteBloc.getClientForTipo('1');
-                                              clienteBloc.getClientForTipo('2');
-                                              Navigator.pop(context);
-                                              _cargando.value = false;
-                                            } else {
-                                              showToast2('${res.message}', Colors.red);
-                                              _cargando.value = false;
-                                            } */
-                                      } else {
-                                        showToast2('Por favor ingrese una Dirección del cliente', Colors.red);
-                                      }
-                                    } else {
-                                      showToast2('Por favor ingrese la fecha de nacimiento del cliente', Colors.red);
-                                    }
+                                  if (res.code == '1') {
+                                    showToast2('Cliente agregado correctamente', Colors.green);
+                                    final incidenciasBloc = ProviderBloc.citaciones(context);
+                                    incidenciasBloc.getIncidencias('3');
+                                    Navigator.pop(context);
+                                    _cargando.value = false;
                                   } else {
-                                    showToast2('Por favor ingrese el nro de teléfono del cliente', Colors.red);
+                                    showToast2('${res.message}', Colors.red);
+                                    _cargando.value = false;
                                   }
                                 } else {
-                                  showToast2('Por favor seleccione el sexo del cliente', Colors.red);
+                                  showToast2('Por favor ingrese el mensaje de la incidencia', Colors.red);
                                 }
                               } else {
-                                showToast2('Por favor ingrese el nombre del cliente', Colors.red);
+                                showToast2('Por favor ingrese el título de la incidencia', Colors.red);
                               }
                             },
                             child: Text(
@@ -616,31 +579,16 @@ class _RegistroDeIncidenciaState extends State<RegistroDeIncidencia> {
     );
   }
 
-  _selectdate(BuildContext context) async {
-    DateTime? picked = await showPlatformDatePicker(
-      context: context,
-      firstDate: DateTime(DateTime.now().month - 1),
-      initialDate: DateTime.now(),
-      lastDate: DateTime(DateTime.now().year + 2),
-    );
-
-    setState(() {
-      fechaDato = "${picked!.year.toString().padLeft(2, '0')}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
-      //inputfieldDateController.text = fechaDato;
- 
-    });
-  }
-}
-
-Widget closeNode(FocusNode node) {
-  return GestureDetector(
-    onTap: () => node.unfocus(),
-    child: Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(8.0),
-      child: const Text(
-        "Cerrar",
+  Widget closeNode(FocusNode node) {
+    return GestureDetector(
+      onTap: () => node.unfocus(),
+      child: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.all(8.0),
+        child: const Text(
+          "Cerrar",
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

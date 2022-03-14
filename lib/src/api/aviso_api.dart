@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:salon_app/src/database/avisos_database.dart';
 import 'package:salon_app/src/models/aviso_model.dart';
+import 'package:salon_app/src/models/http_model.dart';
 import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 import 'package:salon_app/src/utils/constants.dart';
 import 'package:http/http.dart' as http;
@@ -51,6 +52,7 @@ class AvisoApi {
         avisoModel.aulaNivel = decodedData['result']['avisos'][i]['aula_nivel'].toString();
         avisoModel.aulaEstado = decodedData['result']['avisos'][i]['aula_estado'].toString();
         avisoModel.tipoAvisoNombre = decodedData['result']['avisos'][i]['tipo_aviso_nombre'].toString();
+        avisoModel.avisoTitulo = decodedData['result']['avisos'][i]['aviso_titulo'].toString();
         avisoModel.personaNombre = decodedData['result']['avisos'][i]['persona_nombre'].toString();
         avisoModel.personApellidoPaterno = decodedData['result']['avisos'][i]['persona_apellido_paterno'].toString();
         avisoModel.personaApellidoMaterno = decodedData['result']['avisos'][i]['persona_apellido_materno'].toString();
@@ -62,6 +64,46 @@ class AvisoApi {
       if (kDebugMode) {
         print(e);
       }
+    }
+  }
+
+  Future<HttpModel> saveAviso(
+    String idAula,
+    String idAlumno,
+    String idTipoAviso,
+    String avisoMensaje,
+    String fechaPactada,
+    String avisoTitulo,
+  ) async {
+    try {
+      final url = Uri.parse('$apiBaseURL/api/aviso/guardar_aviso');
+
+      final resp = await http.post(url, body: {
+        'tn': prefs.token,
+        'app': 'true',
+        'id_aula': idAula,
+        'id_alumno': idAlumno,
+        'id_tipo_aviso': idTipoAviso,
+        'aviso_mensaje': avisoMensaje,
+        'aviso_fecha_pactada': fechaPactada,
+        'aviso_titulo': avisoTitulo,
+      });
+
+      final decodedData = json.decode(resp.body);
+
+      HttpModel httpModel = HttpModel();
+      httpModel.code = decodedData['result']['code'].toString();
+      httpModel.message = decodedData['result']['message'].toString();
+      return httpModel;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+
+      HttpModel httpModel = HttpModel();
+      httpModel.code = '0';
+      httpModel.message = 'error api';
+      return httpModel;
     }
   }
 }

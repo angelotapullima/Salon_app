@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart'; 
 import 'package:salon_app/src/pages/Content/Aulas/aulas_content.dart';
-import 'package:salon_app/src/pages/Content/Incidencias/incidencias_content.dart'; 
+import 'package:salon_app/src/pages/Content/Incidencias/incidencias_content.dart';
+import 'package:salon_app/src/preferencias/preferencias_usuario.dart'; 
 import 'package:salon_app/src/utils/colors.dart';
+import 'package:salon_app/src/utils/responsive.dart';
 
 class InicioTurores extends StatelessWidget {
   static final _controller = Controller();
@@ -12,6 +15,9 @@ class InicioTurores extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final prefs =Preferences();
+    final responsive = Responsive.of(context);
     return AnimatedBuilder(
         animation: _controller,
         builder: (context, t) {
@@ -34,9 +40,43 @@ class InicioTurores extends StatelessWidget {
                     horizontal: ScreenUtil().setWidth(10),
                   ),
                   child: Row(children:  [
-                    const CircleAvatar(
-                      backgroundColor: Colors.teal,
+                    CircleAvatar(
+                      radius: responsive.ip(2),
+                      child: ClipOval(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: CachedNetworkImage(
+                            placeholder: (context, url) => const SizedBox(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: Image(image: AssetImage('assets/img/profile.png'), fit: BoxFit.cover),
+                            ),
+                            errorWidget: (context, url, error) => SizedBox(
+                              child: SizedBox(
+                                child: Image.asset(
+                                  'assets/img/profile.png',
+                                  fit: BoxFit.cover,
+                                  width: ScreenUtil().setWidth(150),
+                                  height: ScreenUtil().setHeight(150),
+                                ),
+                              ),
+                            ),
+                            imageUrl: '${prefs.image}}',
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                //border: Border.all(color: Colors.red, width: ScreenUtil().setWidth(3)),
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
+                   
                     const Spacer(),
                     const Icon(Fontisto.search),
                     SizedBox(width: ScreenUtil().setWidth(8)),

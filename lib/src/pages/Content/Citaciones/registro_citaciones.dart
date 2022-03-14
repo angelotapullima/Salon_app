@@ -3,19 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:platform_date_picker/platform_date_picker.dart';
+import 'package:salon_app/src/api/aviso_api.dart';
+import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/utils/colors.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 import 'package:salon_app/src/utils/utils.dart';
 
 class RegistroCitaciones extends StatefulWidget {
+  final String idAula;
+  final String idAlumno;
   final String alumno;
   final String grado;
   final String seccion;
+  final bool aula;
   const RegistroCitaciones({
     Key? key,
+    required this.idAula,
+    required this.idAlumno,
     required this.alumno,
     required this.grado,
     required this.seccion,
+    required this.aula,
   }) : super(key: key);
 
   @override
@@ -26,13 +34,12 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
   final ValueNotifier<bool> _cargando = ValueNotifier(false);
   String fechaDato = 'Seleccionar';
   String hourInitial = 'Seleccionar';
-  String hourEnd = 'Seleccionar';
   final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _gradoController = TextEditingController();
   final TextEditingController _seccionController = TextEditingController();
 
-  final TextEditingController _telefonoController = TextEditingController();
-  final TextEditingController _direccionController = TextEditingController();
+  final TextEditingController _tituloController = TextEditingController();
+  final TextEditingController _mensajeController = TextEditingController();
 
   final FocusNode _focusNombre = FocusNode();
   final FocusNode _focusNroDoc = FocusNode();
@@ -45,8 +52,8 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
     _nombreController.dispose();
     _gradoController.dispose();
     _seccionController.dispose();
-    _telefonoController.dispose();
-    _direccionController.dispose();
+    _tituloController.dispose();
+    _mensajeController.dispose();
     super.dispose();
   }
 
@@ -144,57 +151,65 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                         SizedBox(
                           height: ScreenUtil().setHeight(25),
                         ),
-                        Text(
-                          ' Nombre de cliente',
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(16),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: ScreenUtil().setHeight(6),
-                        ),
-                        TextField(
-                          controller: _nombreController,
-                          focusNode: _focusNombre,
-                          readOnly: true,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: 'Nombre ',
-                            hintStyle: TextStyle(
-                              fontSize: ScreenUtil().setSp(14),
-                              color: Colors.grey[600],
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                color: Colors.grey.shade300,
-                                width: 1.0,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                color: Colors.grey.shade300,
-                                width: 2.0,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.shade300,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                ScreenUtil().setWidth(10),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: ScreenUtil().setHeight(20),
-                        ),
+                        (!widget.aula)
+                            ? Text(
+                                ' Nombre de Alumno',
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(16),
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              )
+                            : Container(),
+                        (!widget.aula)
+                            ? SizedBox(
+                                height: ScreenUtil().setHeight(6),
+                              )
+                            : Container(),
+                        (!widget.aula)
+                            ? TextField(
+                                controller: _nombreController,
+                                focusNode: _focusNombre,
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  hintText: 'Nombre ',
+                                  hintStyle: TextStyle(
+                                    fontSize: ScreenUtil().setSp(14),
+                                    color: Colors.grey[600],
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey.shade300,
+                                      width: 1.0,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey.shade300,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.grey.shade300,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      ScreenUtil().setWidth(10),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                        (!widget.aula)
+                            ? SizedBox(
+                                height: ScreenUtil().setHeight(20),
+                              )
+                            : Container(),
                         Row(
                           children: [
                             Expanded(
@@ -317,63 +332,11 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                         SizedBox(
                           height: ScreenUtil().setHeight(20),
                         ),
-                        Text(
-                          ' Fecha de Actividad',
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(16),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: ScreenUtil().setHeight(6),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: Colors.grey.shade300,
-                            ),
-                          ),
-                          padding: EdgeInsets.only(
-                            right: ScreenUtil().setWidth(5),
-                          ),
-                          height: ScreenUtil().setHeight(50),
-                          child: InkWell(
-                            onTap: () {
-                              _selectdate(context);
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    fechaDato,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: (fechaDato != 'Seleccionar Todos') ? const Color(0xff5a5a5a) : colorPrimary,
-                                      fontSize: ScreenUtil().setSp(16),
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                const Icon(
-                                  Icons.calendar_today,
-                                  color: colorPrimary,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: ScreenUtil().setHeight(20),
-                        ),
                         Row(
                           children: [
                             Expanded(
                               child: Text(
-                                ' Hora de Inicio',
+                                ' Fecha de Citación',
                                 style: TextStyle(
                                   fontSize: ScreenUtil().setSp(16),
                                   fontWeight: FontWeight.w600,
@@ -386,7 +349,7 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                             ),
                             Expanded(
                               child: Text(
-                                ' Hora de Fin',
+                                ' Hora de Inicio',
                                 style: TextStyle(
                                   fontSize: ScreenUtil().setSp(16),
                                   fontWeight: FontWeight.w600,
@@ -401,6 +364,49 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                         ),
                         Row(
                           children: [
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                  ),
+                                ),
+                                padding: EdgeInsets.only(
+                                  right: ScreenUtil().setWidth(5),
+                                ),
+                                height: ScreenUtil().setHeight(50),
+                                child: InkWell(
+                                  onTap: () {
+                                    _selectdate(context);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          fechaDato,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: (fechaDato != 'Seleccionar Todos') ? const Color(0xff5a5a5a) : colorPrimary,
+                                            fontSize: ScreenUtil().setSp(16),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                      const Icon(
+                                        Icons.calendar_today,
+                                        color: colorPrimary,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: ScreenUtil().setWidth(15),
+                            ),
                             Expanded(
                               child: Container(
                                 decoration: BoxDecoration(
@@ -441,49 +447,6 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: ScreenUtil().setWidth(15),
-                            ),
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    color: Colors.grey.shade300,
-                                  ),
-                                ),
-                                padding: EdgeInsets.only(
-                                  right: ScreenUtil().setWidth(5),
-                                ),
-                                height: ScreenUtil().setHeight(50),
-                                child: InkWell(
-                                  onTap: () {
-                                    _selectHourFin(context);
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          hourEnd,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: (hourEnd != 'Seleccionar Todos') ? const Color(0xff5a5a5a) : colorPrimary,
-                                            fontSize: ScreenUtil().setSp(16),
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ),
-                                      const Icon(
-                                        Icons.lock_clock_outlined,
-                                        color: colorPrimary,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                         SizedBox(
@@ -504,7 +467,7 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                           height: ScreenUtil().setHeight(6),
                         ),
                         TextField(
-                          controller: _telefonoController,
+                          controller: _tituloController,
                           focusNode: _focusTelefono,
                           decoration: InputDecoration(
                             filled: true,
@@ -543,7 +506,7 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                           height: ScreenUtil().setHeight(20),
                         ),
                         Text(
-                          ' Detalle ',
+                          ' Mensaje ',
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(16),
                             fontWeight: FontWeight.w600,
@@ -555,7 +518,7 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                         ),
                         TextField(
                           maxLines: 3,
-                          controller: _direccionController,
+                          controller: _mensajeController,
                           focusNode: _focusDireccion,
                           decoration: InputDecoration(
                             filled: true,
@@ -599,51 +562,43 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             color: colorPrimary,
                             onPressed: () async {
-                              if (_nombreController.text.isNotEmpty) {
-                                if (valueSexo != 'Seleccionar') {
-                                  if (_telefonoController.text.isNotEmpty) {
-                                    if (fechaDato != 'Seleccionar') {
-                                      if (_direccionController.text.isNotEmpty) {
-                                        /* _cargando.value = true;
-                                            final clienteApi = ClienteApi();
-
-                                            ClienteModel clienteModel = ClienteModel();
-                                            clienteModel.nombreCliente = _nombreController.text;
-                                            clienteModel.tipoDocCliente = valueTipoDoc;
-                                            clienteModel.nroDocCliente = _nroDocController.text;
-                                            clienteModel.codigoCliente = _codigoClienteController.text;
-                                            clienteModel.sexoCliente = valueSexo;
-                                            clienteModel.nacimientoCLiente = fechaDato;
-                                            clienteModel.telefonoCliente = _telefonoController.text;
-                                            clienteModel.direccionCliente = _direccionController.text;
-
-                                            final res = await clienteApi.saveClient(clienteModel);
-
-                                            if (res.code == '1') {
-                                              showToast2('Cliente agregado correctamente', Colors.green);
-                                              final clienteBloc = ProviderBloc.cliente(context);
-                                              clienteBloc.getClientForTipo('1');
-                                              clienteBloc.getClientForTipo('2');
-                                              Navigator.pop(context);
-                                              _cargando.value = false;
-                                            } else {
-                                              showToast2('${res.message}', Colors.red);
-                                              _cargando.value = false;
-                                            } */
-                                      } else {
-                                        showToast2('Por favor ingrese una Dirección del cliente', Colors.red);
-                                      }
-                                    } else {
-                                      showToast2('Por favor ingrese la fecha de nacimiento del cliente', Colors.red);
-                                    }
+                              if (_tituloController.text.isNotEmpty) {
+                                if (_mensajeController.text.isNotEmpty) {
+                                  if (fechaDato == 'Seleccionar') {
+                                    showToast2('Por favor seleccione el día de la actividad', Colors.red);
                                   } else {
-                                    showToast2('Por favor ingrese el nro de teléfono del cliente', Colors.red);
+                                    if (hourInitial == 'Seleccionar') {
+                                      showToast2('Por favor seleccione la hora de la actividad', Colors.red);
+                                    } else {
+                                      _cargando.value = true;
+                                      final avisoApi = AvisoApi();
+
+                                      final res = await avisoApi.saveAviso(
+                                        widget.idAula,
+                                        (!widget.aula) ? widget.idAlumno : '',
+                                        '2',
+                                        _mensajeController.text,
+                                        '$fechaDato $hourInitial',
+                                        _tituloController.text,
+                                      );
+
+                                      if (res.code == '1') {
+                                        showToast2('Cliente agregado correctamente', Colors.green);
+                                        final incidenciasBloc = ProviderBloc.citaciones(context);
+                                        incidenciasBloc.getIncidencias('3');
+                                        Navigator.pop(context);
+                                        _cargando.value = false;
+                                      } else {
+                                        showToast2('${res.message}', Colors.red);
+                                        _cargando.value = false;
+                                      }
+                                    }
                                   }
                                 } else {
-                                  showToast2('Por favor seleccione el sexo del cliente', Colors.red);
+                                  showToast2('Por favor ingrese el mensaje de la incidencia', Colors.red);
                                 }
                               } else {
-                                showToast2('Por favor ingrese el nombre del cliente', Colors.red);
+                                showToast2('Por favor ingrese el título de la incidencia', Colors.red);
                               }
                             },
                             child: Text(
@@ -764,19 +719,6 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
 
     setState(() {
       hourInitial = "${picked!.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}";
-      //inputfieldDateController.text = fechaDato;
-    });
-  }
-
-  _selectHourFin(BuildContext context) async {
-    TimeOfDay now = TimeOfDay.now();
-    TimeOfDay? picked = await showPlatformTimePicker(
-      context: context,
-      initialTime: now,
-    );
-
-    setState(() {
-      hourEnd = "${picked!.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}";
       //inputfieldDateController.text = fechaDato;
     });
   }

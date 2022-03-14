@@ -6,6 +6,7 @@ import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/models/aviso_model.dart';
 import 'package:salon_app/src/pages/Content/Citaciones/citaciones_detail.dart';
 import 'package:salon_app/src/utils/responsive.dart';
+import 'package:salon_app/src/utils/utils.dart';
 
 class CitacionesContent extends StatelessWidget {
   const CitacionesContent({
@@ -146,25 +147,50 @@ class CitacionesContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${aviso.aulaGrado} ${aviso.aulaSeccion} - ${aviso.aulaNivel}',
+                '${aviso.avisoTitulo}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              ('${aviso.idAlumno}' == 'null')
+                  ? Text(
+                      '${aviso.aulaGrado} ${aviso.aulaSeccion} - ${aviso.aulaNivel}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : Text(
+                      '${aviso.personaNombre} ${aviso.personApellidoPaterno} ${aviso.personaApellidoMaterno}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
               Text(
-                '${aviso.avisoHoraPactada}',
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                '${aviso.avisoMensaje}',
+                '${aviso.avisoMensaje} ',
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: ScreenUtil().setSp(13),
                 ),
+              ),
+              Row(
+                children: [
+                  const Icon(Icons.calendar_month),
+                  Text(
+                    ' ${obtenerFecha('${aviso.avisoFechaPactada}')} ',
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '${aviso.avisoHoraPactada}',
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               const Text(''),
             ],

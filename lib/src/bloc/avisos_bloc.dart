@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:salon_app/src/api/aviso_api.dart';
 import 'package:salon_app/src/api/local_notification_api.dart';
@@ -117,6 +118,7 @@ class AvisosBloc {
             alertModel.aulaNivel = fechix[y].aulaNivel;
             alertModel.aulaEstado = fechix[y].aulaEstado;
             alertModel.tipoAvisoNombre = fechix[y].tipoAvisoNombre;
+            alertModel.avisoTitulo = fechix[y].avisoTitulo;
             alertModel.personaNombre = fechix[y].personaNombre;
             alertModel.personApellidoPaterno = fechix[y].personApellidoPaterno;
             alertModel.personaApellidoMaterno = fechix[y].personaApellidoMaterno;
@@ -131,7 +133,9 @@ class AvisosBloc {
         }
       }
     }
-    print('ffv');
+    if (kDebugMode) {
+      print('ffv');
+    }
     return listaReturn;
   }
 }

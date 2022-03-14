@@ -13,6 +13,7 @@ class AvisoModel {
   String? aulaNivel;
   String? aulaEstado;
   String? tipoAvisoNombre;
+  String? avisoTitulo;
   String? personaNombre;
   String? personApellidoPaterno;
   String? personaApellidoMaterno;
@@ -32,6 +33,7 @@ class AvisoModel {
     this.aulaNivel,
     this.aulaEstado,
     this.tipoAvisoNombre,
+    this.avisoTitulo,
     this.personaNombre,
     this.personApellidoPaterno,
     this.personaApellidoMaterno,
@@ -54,6 +56,7 @@ class AvisoModel {
         'aulaNivel': aulaNivel,
         'aulaEstado': aulaEstado,
         'tipoAvisoNombre': tipoAvisoNombre,
+        'avisoTitulo': avisoTitulo,
         'personaNombre': personaNombre,
         'personApellidoPaterno': personApellidoPaterno,
         'personaApellidoMaterno': personaApellidoMaterno,
@@ -74,6 +77,7 @@ class AvisoModel {
         aulaNivel: json["aulaNivel"],
         aulaEstado: json["aulaEstado"],
         tipoAvisoNombre: json["tipoAvisoNombre"],
+        avisoTitulo: json["avisoTitulo"],
         personaNombre: json["personaNombre"],
         personApellidoPaterno: json["personApellidoPaterno"],
         personaApellidoMaterno: json["personaApellidoMaterno"],

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/models/aviso_model.dart';
 import 'package:salon_app/src/pages/Content/Incidencias/incidencias_detail.dart';
-import 'package:salon_app/src/utils/responsive.dart'; 
+import 'package:salon_app/src/utils/responsive.dart';
 
 class IncideciasContent extends StatelessWidget {
   const IncideciasContent({
@@ -95,7 +94,7 @@ class IncideciasContent extends StatelessWidget {
                           crossAxisSpacing: responsive.wp(5),
                         ), */
                         itemBuilder: (context, i) {
-                          return _itemCitaciones(context, fechas[y].citaciones![i], responsive);
+                          return _itemIncidencias(context, fechas[y].citaciones![i], responsive);
                         },
                       ),
                     ),
@@ -110,7 +109,7 @@ class IncideciasContent extends StatelessWidget {
     );
   }
 
-  Widget _itemCitaciones(BuildContext context, AvisoModel aviso, Responsive responsive) {
+  Widget _itemIncidencias(BuildContext context, AvisoModel aviso, Responsive responsive) {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -147,11 +146,24 @@ class IncideciasContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${aviso.aulaGrado} ${aviso.aulaSeccion} - ${aviso.aulaNivel}',
+                '${aviso.avisoTitulo}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              ('${aviso.idAlumno}' == 'null')
+                  ? Text(
+                      '${aviso.aulaGrado} ${aviso.aulaSeccion} - ${aviso.aulaNivel}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : Text(
+                      '${aviso.personaNombre} ${aviso.personApellidoPaterno} ${aviso.personaApellidoMaterno}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
               Text(
                 '${aviso.avisoHoraPactada}',
                 style: const TextStyle(
