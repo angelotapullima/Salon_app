@@ -3,6 +3,7 @@ import 'package:salon_app/src/bloc/alumnos_bloc.dart';
 import 'package:salon_app/src/bloc/aula_bloc.dart';
 import 'package:salon_app/src/bloc/bottom_navigation_bloc.dart';
 import 'package:salon_app/src/bloc/avisos_bloc.dart';
+import 'package:salon_app/src/bloc/busqueda_estudiante_bloc.dart';
 import 'package:salon_app/src/bloc/hijos_bloc.dart';
 
 class ProviderBloc extends InheritedWidget {
@@ -11,6 +12,7 @@ class ProviderBloc extends InheritedWidget {
   final alumnosBloc = AlumnosBloc();
   final citacionesBloc = AvisosBloc();
   final hijosBloc = HijosBloc();
+  final busquedaBloc = BusquedaEstudianteBloc();
 
   ProviderBloc({Key? key, required Widget child}) : super(key: key, child: child);
 
@@ -35,5 +37,9 @@ class ProviderBloc extends InheritedWidget {
 
   static HijosBloc hijo(BuildContext context) {
     return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>())!.hijosBloc;
+  }
+
+  static BusquedaEstudianteBloc busqueda(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>())!.busquedaBloc;
   }
 }

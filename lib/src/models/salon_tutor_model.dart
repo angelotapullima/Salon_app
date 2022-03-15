@@ -1,3 +1,5 @@
+import 'package:salon_app/src/models/alumno_model.dart';
+
 class AulaModel {
   AulaModel({
     this.idAula,
@@ -5,13 +7,15 @@ class AulaModel {
     this.aulaSeccion,
     this.aulaNivel,
     this.aulaEstado,
+    this.alumnos,
   });
   String? idAula;
   String? aulaGrado;
   String? aulaSeccion;
   String? aulaNivel;
   String? aulaEstado;
-  
+  List<AlumnoModel>? alumnos;
+
   static List<AulaModel> fromJsonList(List<dynamic> json) => json.map((i) => AulaModel.fromJson(i)).toList();
 
   Map<String, dynamic> toJson() => {
@@ -30,4 +34,3 @@ class AulaModel {
         aulaEstado: json["aulaEstado"],
       );
 }
-

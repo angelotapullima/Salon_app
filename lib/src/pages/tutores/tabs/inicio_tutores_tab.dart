@@ -4,6 +4,7 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/pages/Content/Aulas/aulas_content.dart';
+import 'package:salon_app/src/pages/Content/Busqueda/buscar_estudiante.dart';
 import 'package:salon_app/src/pages/Content/Incidencias/incidencias_content.dart';
 import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 import 'package:salon_app/src/utils/colors.dart';
@@ -73,7 +74,34 @@ class InicioTurores extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    const Icon(Fontisto.search),
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation, secondaryAnimation) {
+                                return const BuscarEstudiantePage(
+                                  valor: '1',
+                                );
+                              },
+                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                var begin = const Offset(0.0, 1.0);
+                                var end = Offset.zero;
+                                var curve = Curves.ease;
+
+                                var tween = Tween(begin: begin, end: end).chain(
+                                  CurveTween(curve: curve),
+                                );
+
+                                return SlideTransition(
+                                  position: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        child: const Icon(Fontisto.search)),
                     SizedBox(width: ScreenUtil().setWidth(8)),
                   ]),
                 ),

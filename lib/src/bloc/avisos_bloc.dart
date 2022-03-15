@@ -93,9 +93,10 @@ class AvisosBloc {
         FechaAvisosModel fechaAlertModel = FechaAvisosModel();
         fechaAlertModel.fecha = obtenerFecha(listDates[x].toString());
         var fechix = [];
-        if (esHijo) { if (prefs.hijoId == null) {
-        return [];
-      }
+        if (esHijo) {
+          if (prefs.hijoId == null) {
+            return [];
+          }
           fechix = await avisosDatabase.getAvisoByFechaHijo(listDates[x].toString(), tipoAviso, prefs.hijoId);
         } else {
           fechix = await avisosDatabase.getAvisoByFecha(listDates[x].toString(), tipoAviso);
@@ -116,7 +117,7 @@ class AvisosBloc {
                   title: '${fechix[y].tipoAvisoNombre}',
                   body: "${fechix[y].avisoMensaje} | Hoy a las ${fechix[y].avisoHoraPactada} horas",
                   playLoad: '${fechix[y].idAviso}',
-                  time: DateTime.now().add(const Duration(seconds: 2)),
+                  time: DateTime.now().add(const Duration(seconds: 1)),
                 );
               }
               LocalNotificationApi.showAlertProgramado(
@@ -129,6 +130,15 @@ class AvisosBloc {
                 ),
               );
             }
+
+            // LocalNotificationApi.showAlertProgramado(
+            //   id: y,
+            //   title: '${fechix[y].tipoAvisoNombre}',
+            //   body: "${fechix[y].avisoMensaje} | Hoy a las ${fechix[y].avisoHoraPactada} horas",
+            //   playLoad: '${fechix[y].idAviso}',
+            //   time: DateTime.now().add(const Duration(seconds: 2)),
+            // );
+
             AvisoModel alertModel = AvisoModel();
 
             alertModel.idAviso = fechix[y].idAviso;

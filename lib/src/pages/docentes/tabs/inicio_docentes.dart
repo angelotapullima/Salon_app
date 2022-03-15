@@ -4,6 +4,7 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/pages/Content/Aulas/aulas_content.dart';
+import 'package:salon_app/src/pages/Content/Busqueda/buscar_estudiante.dart';
 import 'package:salon_app/src/pages/Content/Citaciones/citaciones_content.dart';
 import 'package:salon_app/src/pages/Content/actividades/actividades_content.dart';
 import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
@@ -19,7 +20,6 @@ class InicioDocentes extends StatelessWidget {
     final prefs = Preferences();
     final responsive = Responsive.of(context);
 
-  
     return Scaffold(
       //backgroundColor: const Color.fromARGB(255, 245, 246, 248),
       backgroundColor: const Color(0xfff1eff6),
@@ -75,7 +75,34 @@ class InicioDocentes extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    const Icon(Fontisto.search),
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation, secondaryAnimation) {
+                                return const BuscarEstudiantePage(
+                                  valor: '2',
+                                );
+                              },
+                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                var begin = const Offset(0.0, 1.0);
+                                var end = Offset.zero;
+                                var curve = Curves.ease;
+
+                                var tween = Tween(begin: begin, end: end).chain(
+                                  CurveTween(curve: curve),
+                                );
+
+                                return SlideTransition(
+                                  position: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        child: const Icon(Fontisto.search)),
                     SizedBox(width: ScreenUtil().setWidth(8)),
                   ]),
                 ),
@@ -114,10 +141,10 @@ class InicioDocentes extends StatelessWidget {
                 ),
                 Expanded(
                   child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              topRight: Radius.circular(40),
-                            ),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
                     child: Container(
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -129,8 +156,12 @@ class InicioDocentes extends StatelessWidget {
                       child: (_controller.valueBoton == 1)
                           ? const Aulas(valor: '2')
                           : (_controller.valueBoton == 2)
-                              ? const CitacionesContent(esHijo: false,)
-                              : const ActividadesContent(esHijo: false,),
+                              ? const CitacionesContent(
+                                  esHijo: false,
+                                )
+                              : const ActividadesContent(
+                                  esHijo: false,
+                                ),
                     ),
                   ),
                 )

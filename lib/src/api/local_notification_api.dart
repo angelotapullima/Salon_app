@@ -11,6 +11,7 @@ class LocalNotificationApi {
   static final onNotifications = BehaviorSubject<String?>();
 
   static _alertDetails() async {
+    print('entré');
     return const NotificationDetails(
       android: AndroidNotificationDetails(
         'chanel id 2',
@@ -21,8 +22,8 @@ class LocalNotificationApi {
     );
   }
 
-  static Future init({bool initScheluded = false}) async { 
-    final android =    AndroidInitializationSettings('@mipmap/ic_launcher');
+  static Future init({bool initScheluded = false}) async {
+    final android = AndroidInitializationSettings('@mipmap/ic_launcher');
     final ios = IOSInitializationSettings();
     final settings = InitializationSettings(android: android, iOS: ios);
     final details = await _alert.getNotificationAppLaunchDetails();

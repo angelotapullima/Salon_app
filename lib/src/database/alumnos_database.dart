@@ -38,6 +38,22 @@ class AlumnoDatabase {
     }
   }
 
+  Future<List<AlumnoModel>> getAlumnosByQuery(String idAula, String query) async {
+    try {
+      final Database db = await dbprovider.getDatabase();
+      List<AlumnoModel> list = [];
+      List<Map> maps = await db.rawQuery(
+          "SELECT * FROM Alumno where alumnoNombre LIKE '%$query%' or alumnoApellido LIKE '%$query%'  and idAula = '$idAula' and alumnoEstado = '1'  ");
+
+      if (maps.isNotEmpty) list = AlumnoModel.fromJsonList(maps);
+      return list;
+    } catch (e) {
+      if (kDebugMode) {
+        print(" $e Error en la  tabla Alumno");
+      }
+      return [];
+    }
+  }
 
   deleteAlumnos() async {
     final db = await dbprovider.database;
