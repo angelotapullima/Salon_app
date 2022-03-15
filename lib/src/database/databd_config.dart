@@ -9,11 +9,12 @@ class DatabaseHelper {
   Future<Database> get database async => _database ??= await getDatabase();
 
   Future<Database> getDatabase() async {
-    final String path = join(await getDatabasesPath(), 'salonv1.db');
+    final String path = join(await getDatabasesPath(), 'salonv5.db');
     return openDatabase(path, onCreate: (db, version) {
       db.execute(tableAulaSql);
       db.execute(tableAlumnosSql);
       db.execute(tableAvisosSql);
+      db.execute(tableHijoSql);
     }, version: 1, onDowngrade: onDatabaseDowngradeDelete);
   }
 
@@ -39,6 +40,7 @@ class DatabaseHelper {
       ' idAviso TEXT PRIMARY KEY,'
       ' idAula TEXT,'
       ' idAlumno TEXT,'
+      ' idHijo TEXT,'
       ' idResponsable TEXT,'
       ' idTipoAviso TEXT,'
       ' avisoMensaje TEXT,'
@@ -54,4 +56,15 @@ class DatabaseHelper {
       ' personaNombre TEXT,'
       ' personApellidoPaterno TEXT,'
       ' personaApellidoMaterno TEXT)';
+
+  static const String tableHijoSql = 'CREATE TABLE Hijo('
+      ' idAlumno TEXT PRIMARY KEY,'
+      ' idAula TEXT,'
+      ' alumnoNombre TEXT,'
+      ' alumnoApellido TEXT,'
+      ' alumnoImagen TEXT,'
+      ' alumnoNacimiento TEXT,'
+      ' alumnoTelefono TEXT,'
+      ' alumnoEmail TEXT,'
+      ' alumnoEstado TEXT)';
 }

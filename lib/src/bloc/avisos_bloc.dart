@@ -1,14 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:salon_app/src/api/aviso_api.dart';
 import 'package:salon_app/src/api/local_notification_api.dart';
 import 'package:salon_app/src/database/avisos_database.dart';
 import 'package:salon_app/src/models/aviso_model.dart';
+import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 import 'package:salon_app/src/utils/utils.dart';
 
 class AvisosBloc {
   final avisosDatabase = AvisosDatabase();
   final avisoApi = AvisoApi();
+  final prefs = Preferences();
 
   final _citacionesController = BehaviorSubject<List<FechaAvisosModel>>();
   Stream<List<FechaAvisosModel>> get citacionesStream => _citacionesController.stream;
@@ -25,25 +26,38 @@ class AvisosBloc {
     _incidenciasController.close();
   }
 
-  void getIncidencias(String tipoAviso) async {
-    _incidenciasController.sink.add(await getAvisosDate(tipoAviso));
+  void getIncidencias(String tipoAviso, bool esHijo) async {
+    _incidenciasController.sink.add(await getAvisosDate(tipoAviso, esHijo));
+    if (esHijo) {
+      await avisoApi.getAvisosHijos();
+    } else {
+      await avisoApi.getAvisos();
+    }
     await avisoApi.getAvisos();
-    _incidenciasController.sink.add(await getAvisosDate(tipoAviso));
+    _incidenciasController.sink.add(await getAvisosDate(tipoAviso, esHijo));
   }
 
-  void getActividades(String tipoAviso) async {
-    _actividadesController.sink.add(await getAvisosDate(tipoAviso));
-    await avisoApi.getAvisos();
-    _actividadesController.sink.add(await getAvisosDate(tipoAviso));
+  void getActividades(String tipoAviso, bool esHijo) async {
+    _actividadesController.sink.add(await getAvisosDate(tipoAviso, esHijo));
+    if (esHijo) {
+      await avisoApi.getAvisosHijos();
+    } else {
+      await avisoApi.getAvisos();
+    }
+    _actividadesController.sink.add(await getAvisosDate(tipoAviso, esHijo));
   }
 
-  void getCitaciones(String tipoAviso) async {
-    _citacionesController.sink.add(await getAvisosDate(tipoAviso));
-    await avisoApi.getAvisos();
-    _citacionesController.sink.add(await getAvisosDate(tipoAviso));
+  void getCitaciones(String tipoAviso, bool esHijo) async {
+    _citacionesController.sink.add(await getAvisosDate(tipoAviso, esHijo));
+    if (esHijo) {
+      await avisoApi.getAvisosHijos();
+    } else {
+      await avisoApi.getAvisos();
+    }
+    _citacionesController.sink.add(await getAvisosDate(tipoAviso, esHijo));
   }
 
-  Future<List<FechaAvisosModel>> getAvisosDate(String tipoAviso) async {
+  Future<List<FechaAvisosModel>> getAvisosDate(String tipoAviso, bool esHijo) async {
     final List<FechaAvisosModel> listaReturn = [];
     final List<String> listDates = [];
 
@@ -56,8 +70,15 @@ class AvisosBloc {
     } else {
       fecha = "${now.year.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
     }
-
-    final fechasAlertas = await avisosDatabase.getAvisos(fecha, tipoAviso);
+    var fechasAlertas = [];
+    if (esHijo) {
+      if (prefs.hijoId == null) {
+        return [];
+      }
+      fechasAlertas = await avisosDatabase.getAvisosHijo(fecha, tipoAviso, prefs.hijoId);
+    } else {
+      fechasAlertas = await avisosDatabase.getAvisos(fecha, tipoAviso);
+    }
 
     if (fechasAlertas.isNotEmpty) {
       for (var i = 0; i < fechasAlertas.length; i++) {
@@ -71,8 +92,14 @@ class AvisosBloc {
         //final List<String> horitas = [];
         FechaAvisosModel fechaAlertModel = FechaAvisosModel();
         fechaAlertModel.fecha = obtenerFecha(listDates[x].toString());
-
-        final fechix = await avisosDatabase.getAvisoByFecha(listDates[x].toString(), tipoAviso);
+        var fechix = [];
+        if (esHijo) { if (prefs.hijoId == null) {
+        return [];
+      }
+          fechix = await avisosDatabase.getAvisoByFechaHijo(listDates[x].toString(), tipoAviso, prefs.hijoId);
+        } else {
+          fechix = await avisosDatabase.getAvisoByFecha(listDates[x].toString(), tipoAviso);
+        }
 
         if (fechix.isNotEmpty) {
           for (var y = 0; y < fechix.length; y++) {
@@ -107,6 +134,7 @@ class AvisosBloc {
             alertModel.idAviso = fechix[y].idAviso;
             alertModel.idAula = fechix[y].idAula;
             alertModel.idAlumno = fechix[y].idAlumno;
+            alertModel.idHijo = fechix[y].idHijo;
             alertModel.idResponsable = fechix[y].idResponsable;
             alertModel.idTipoAviso = fechix[y].idTipoAviso;
             alertModel.avisoMensaje = fechix[y].avisoMensaje;
@@ -133,7 +161,7 @@ class AvisosBloc {
         }
       }
     }
-    
+
     return listaReturn;
   }
 }

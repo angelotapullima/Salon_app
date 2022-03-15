@@ -9,14 +9,16 @@ import 'package:salon_app/src/utils/responsive.dart';
 import 'package:salon_app/src/utils/utils.dart';
 
 class ActividadesContent extends StatelessWidget {
+  final bool esHijo;
   const ActividadesContent({
     Key? key,
+    required this.esHijo,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final avisosBloc = ProviderBloc.citaciones(context);
-    avisosBloc.getActividades('2');
+    avisosBloc.getActividades('2', esHijo);
     return SafeArea(
       child: StreamBuilder(
         stream: avisosBloc.actividadesStream,

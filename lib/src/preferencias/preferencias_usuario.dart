@@ -1,12 +1,7 @@
-
-
-
-
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
-  static final Preferences _instancia =  Preferences._internal();
+  static final Preferences _instancia = Preferences._internal();
 
   factory Preferences() {
     return _instancia;
@@ -21,12 +16,26 @@ class Preferences {
   }
 
   clearPreferences() async {
-
     await _prefs!.clear();
-
   }
 
+  get hijoId {
+    return _prefs!.getString('hijoId');
+  }
 
+  set hijoIds(String value) {
+    _prefs!.setString('hijoId', value);
+  }
+
+  get hijoNombre {
+    return _prefs!.getString('hijoNombre');
+  }
+
+  set hijoNombres(String value) {
+    _prefs!.setString('hijoNombre', value);
+  }
+
+  
 
   get idUser {
     return _prefs!.getString('id_user');
@@ -35,15 +44,6 @@ class Preferences {
   set idUsers(String value) {
     _prefs!.setString('id_user', value);
   }
-  /* 
-
-  get idPerson {
-    _prefs!.getString('id_person');
-  }
-
-  set idPersons(String value) {
-    _prefs!.setString('id_person', value);
-  } */
 
   get userNickname {
     return _prefs!.getString('user_nickname');
@@ -60,7 +60,6 @@ class Preferences {
   set userEmails(String value) {
     _prefs!.setString('user_email', value);
   }
-
 
   get image {
     return _prefs!.getString('image');
@@ -85,46 +84,6 @@ class Preferences {
   set personSurnames(String value) {
     _prefs!.setString('person_surname', value);
   }
-/* 
-  get personDni {
-    return _prefs!.getString('person_dni');
-  }
-
-  set personDnis(String value) {
-    _prefs!.setString('person_dni', value);
-  }
-
-  get personBirth {
-    return _prefs!.getString('person_birth');
-  }
-
-  set personBirths(String value) {
-    _prefs!.setString('person_birth', value);
-  }
-
-  get personNumberPhone {
-    return _prefs!.getString('person_number_phone');
-  }
-
-  set personNumberPhones(String value) {
-    _prefs!.setString('person_number_phone', value);
-  }
-
-  get personGenre {
-    return _prefs!.getString('person_genre');
-  }
-
-  set personGenres(String value) {
-    _prefs!.setString('person_genre', value);
-  }
-
-  get personNacionalidad {
-    return _prefs!.getString('person_nacionalidad');
-  }
-
-  set personNacionalidads(String value) {
-    _prefs!.setString('person_nacionalidad', value);
-  }*/ 
 
   get rolNombre {
     return _prefs!.getString('rol_nombre');
@@ -141,15 +100,7 @@ class Preferences {
   set idRols(String value) {
     _prefs!.setString('id_rol', value);
   }
-/* 
-  get personAddress {
-    return _prefs!.getString('person_address');
-  }
 
-  set personAddresss(String value) {
-    _prefs!.setString('person_address', value);
-  }
- */
   get versionApp {
     return _prefs!.getString('versionApp');
   }
@@ -157,9 +108,6 @@ class Preferences {
   set versionApps(String value) {
     _prefs!.setString('versionApp', value);
   }
-  
-
-
 
   get token {
     return _prefs!.getString('token');
@@ -176,6 +124,4 @@ class Preferences {
   set tokenFirebases(String value) {
     _prefs!.setString('token_firebase', value);
   }
-
-
 }

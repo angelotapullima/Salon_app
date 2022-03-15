@@ -3,7 +3,7 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salon_app/src/api/local_notification_api.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
-import 'package:salon_app/src/pages/padres/tabs/inicio_tab.dart';
+import 'package:salon_app/src/pages/padres/inicio_padres.dart';
 import 'package:salon_app/src/pages/padres/tabs/perfil_padres.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 

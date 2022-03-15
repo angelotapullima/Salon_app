@@ -7,15 +7,15 @@ import 'package:salon_app/src/models/aviso_model.dart';
 import 'package:salon_app/src/pages/Content/Incidencias/incidencias_detail.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 
-class IncideciasContent extends StatelessWidget {
+class IncideciasContent extends StatelessWidget {final bool esHijo;
   const IncideciasContent({
-    Key? key,
+    Key? key,required this.esHijo,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final incidenciasBloc = ProviderBloc.citaciones(context);
-    incidenciasBloc.getIncidencias('3');
+    incidenciasBloc.getIncidencias('3',esHijo);
     return SafeArea(
       child: StreamBuilder(
         stream: incidenciasBloc.incidenciasStream,

@@ -113,19 +113,25 @@ class InicioDocentes extends StatelessWidget {
                   height: ScreenUtil().setHeight(20),
                 ),
                 Expanded(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(40),
+                  child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(40),
+                              topRight: Radius.circular(40),
+                            ),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          topRight: Radius.circular(40),
+                        ),
                       ),
+                      child: (_controller.valueBoton == 1)
+                          ? const Aulas(valor: '2')
+                          : (_controller.valueBoton == 2)
+                              ? const CitacionesContent(esHijo: false,)
+                              : const ActividadesContent(esHijo: false,),
                     ),
-                    child: (_controller.valueBoton == 1)
-                        ? const Aulas(valor: '2')
-                        : (_controller.valueBoton == 2)
-                            ? const CitacionesContent()
-                            : const ActividadesContent(),
                   ),
                 )
               ],

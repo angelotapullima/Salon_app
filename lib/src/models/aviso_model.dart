@@ -2,6 +2,7 @@ class AvisoModel {
   String? idAviso;
   String? idAula;
   String? idAlumno;
+  String? idHijo;
   String? idResponsable;
   String? idTipoAviso;
   String? avisoMensaje;
@@ -22,6 +23,7 @@ class AvisoModel {
     this.idAviso,
     this.idAula,
     this.idAlumno,
+    this.idHijo,
     this.idResponsable,
     this.idTipoAviso,
     this.avisoMensaje,
@@ -45,6 +47,7 @@ class AvisoModel {
         'idAviso': idAviso,
         'idAula': idAula,
         'idAlumno': idAlumno,
+        'idHijo': idHijo,
         'idResponsable': idResponsable,
         'idTipoAviso': idTipoAviso,
         'avisoMensaje': avisoMensaje,
@@ -66,6 +69,7 @@ class AvisoModel {
         idAviso: json["idAviso"],
         idAula: json["idAula"],
         idAlumno: json["idAlumno"],
+        idHijo: json["idHijo"],
         idResponsable: json["idResponsable"],
         idTipoAviso: json["idTipoAviso"],
         avisoMensaje: json["avisoMensaje"],

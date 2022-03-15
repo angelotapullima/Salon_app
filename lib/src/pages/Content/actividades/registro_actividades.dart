@@ -577,7 +577,7 @@ class _RegistroActividadesState extends State<RegistroActividades> {
                                       if (res.code == '1') {
                                         showToast2('Cliente agregado correctamente', Colors.green);
                                         final incidenciasBloc = ProviderBloc.citaciones(context);
-                                        incidenciasBloc.getIncidencias('3');
+                                        incidenciasBloc.getActividades('2',false);
                                         Navigator.pop(context);
                                         _cargando.value = false;
                                       } else {

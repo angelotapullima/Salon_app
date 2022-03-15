@@ -9,14 +9,15 @@ import 'package:salon_app/src/utils/responsive.dart';
 import 'package:salon_app/src/utils/utils.dart';
 
 class CitacionesContent extends StatelessWidget {
+   final bool esHijo;
   const CitacionesContent({
-    Key? key,
+    Key? key,required this.esHijo,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final citacionesBloc = ProviderBloc.citaciones(context);
-    citacionesBloc.getCitaciones('1');
+    citacionesBloc.getCitaciones('1',esHijo);
     return SafeArea(
       child: StreamBuilder(
         stream: citacionesBloc.citacionesStream,

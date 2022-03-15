@@ -22,13 +22,12 @@ class AvisosDatabase {
     }
   }
 
-  //citaciones => IdTipoAviso = 1
-  Future<List<AvisoModel>> getAvisos( String date,String tipoAviso) async {
+  Future<List<AvisoModel>> getAvisos(String date, String tipoAviso) async {
     try {
       final Database db = await dbprovider.getDatabase();
       List<AvisoModel> list = [];
-      List<Map> maps =
-          await db.rawQuery("SELECT * FROM Aviso where IdTipoAviso = '$tipoAviso' and date(avisoFechaPactada) >= '$date' group by avisoFechaPactada ");
+      List<Map> maps = await db
+          .rawQuery("SELECT * FROM Aviso where IdTipoAviso = '$tipoAviso' and date(avisoFechaPactada) >= '$date' group by avisoFechaPactada ");
 
       if (maps.isNotEmpty) list = AvisoModel.fromJsonList(maps);
       return list;
@@ -40,8 +39,7 @@ class AvisosDatabase {
     }
   }
 
-
-  Future<List<AvisoModel>> getAvisoByFecha(String date, String  idTipoAviso) async {
+  Future<List<AvisoModel>> getAvisoByFecha(String date, String idTipoAviso) async {
     try {
       final Database db = await dbprovider.getDatabase();
       List<AvisoModel> list = [];
@@ -57,6 +55,39 @@ class AvisosDatabase {
     }
   }
 
+  Future<List<AvisoModel>> getAvisosHijo(String date, String tipoAviso, String idHijo) async {
+    try {
+      final Database db = await dbprovider.getDatabase();
+      List<AvisoModel> list = [];
+      List<Map> maps = await db.rawQuery(
+          "SELECT * FROM Aviso where IdTipoAviso = '$tipoAviso' and date(avisoFechaPactada) >= '$date' and idHijo='$idHijo' group by avisoFechaPactada ");
+
+      if (maps.isNotEmpty) list = AvisoModel.fromJsonList(maps);
+      return list;
+    } catch (e) {
+      if (kDebugMode) {
+        print(" $e Error en la  tabla Alumno");
+      }
+      return [];
+    }
+  }
+
+  Future<List<AvisoModel>> getAvisoByFechaHijo(String date, String idTipoAviso, String idHijo) async {
+    try {
+      final Database db = await dbprovider.getDatabase();
+      List<AvisoModel> list = [];
+      List<Map> maps =
+          await db.rawQuery("SELECT * FROM Aviso WHERE avisoFechaPactada='$date' and idTipoAviso = '$idTipoAviso' and idHijo='$idHijo' ");
+
+      if (maps.isNotEmpty) list = AvisoModel.fromJsonList(maps);
+      return list;
+    } catch (e) {
+      if (kDebugMode) {
+        print(" $e Error en la  tabla Alert");
+      }
+      return [];
+    }
+  }
 
   deleteAviso() async {
     final db = await dbprovider.database;

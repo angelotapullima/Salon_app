@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart'; 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/pages/Content/Aulas/aulas_content.dart';
 import 'package:salon_app/src/pages/Content/Incidencias/incidencias_content.dart';
-import 'package:salon_app/src/preferencias/preferencias_usuario.dart'; 
+import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 import 'package:salon_app/src/utils/colors.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 
@@ -15,17 +15,13 @@ class InicioTurores extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final prefs =Preferences();
+    final prefs = Preferences();
     final responsive = Responsive.of(context);
     return AnimatedBuilder(
         animation: _controller,
         builder: (context, t) {
           return Scaffold(
-            floatingActionButton: (_controller.valueBoton == 2)
-                ? Container( 
-                  )
-                : Container(),
+            floatingActionButton: (_controller.valueBoton == 2) ? Container() : Container(),
             //backgroundColor: const Color.fromARGB(255, 245, 246, 248),
             backgroundColor: const Color(0xfff1eff6),
             body: SafeArea(
@@ -39,7 +35,7 @@ class InicioTurores extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: ScreenUtil().setWidth(10),
                   ),
-                  child: Row(children:  [
+                  child: Row(children: [
                     CircleAvatar(
                       radius: responsive.ip(2),
                       child: ClipOval(
@@ -76,7 +72,6 @@ class InicioTurores extends StatelessWidget {
                         ),
                       ),
                     ),
-                   
                     const Spacer(),
                     const Icon(Fontisto.search),
                     SizedBox(width: ScreenUtil().setWidth(8)),
@@ -116,7 +111,11 @@ class InicioTurores extends StatelessWidget {
                           topRight: Radius.circular(40),
                         ),
                       ),
-                      child: (_controller.valueBoton == 1) ? const Aulas(valor:'1') : const IncideciasContent(),
+                      child: (_controller.valueBoton == 1)
+                          ? const Aulas(valor: '1')
+                          : const IncideciasContent(
+                              esHijo: false,
+                            ),
                     ),
                   ),
                 )
