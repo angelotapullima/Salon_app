@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/pages/home.dart';
-import 'package:salon_app/src/pages/login.dart'; 
+import 'package:salon_app/src/pages/login.dart';
 import 'package:salon_app/src/pages/splash.dart';
 import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
+import 'package:salon_app/src/preferencias/push_notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +15,10 @@ void main() async {
   //final prefsBufiPaymets = new PreferencesBufiPayments();
 
   await prefs.initPrefs();
+
+  final firebase = FirebaseInstance();
+
+  firebase.initConfig();
   runApp(const MyApp());
 }
 
