@@ -87,50 +87,6 @@ class _InicioPadreState extends State<InicioPadre> {
                               ),
                             ),
                             const Spacer(),
-                            Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.grey.shade300,
-                                  ),
-                                  borderRadius: BorderRadius.circular(5)),
-                              height: ScreenUtil().setHeight(50),
-                              width: ScreenUtil().setHeight(50),
-                              child: Center(
-                                child: Stack(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      children: [
-                                        const SizedBox(),
-                                        const Icon(Fontisto.bell),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(width: ScreenUtil().setWidth(15)),
-                                        Container(
-                                          height: ScreenUtil().setHeight(18),
-                                          width: ScreenUtil().setHeight(18),
-                                          //padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                                          decoration: const BoxDecoration(
-                                            color: Colors.blue,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: const Center(
-                                            child: Text(
-                                              '3',
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
                           ]),
                         ),
                         Padding(

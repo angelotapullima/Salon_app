@@ -1,8 +1,11 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/api/login_api.dart';
+import 'package:salon_app/src/api/token_api.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
+import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 import 'package:salon_app/src/utils/colors.dart';
 import 'package:salon_app/src/utils/utils.dart';
 import 'package:salon_app/src/widget/show_loading.dart';
@@ -165,6 +168,17 @@ class _LoginState extends State<Login> {
                               if (res.code == '1') {
                                 final bottomBloc = ProviderBloc.botton(context);
                                 bottomBloc.changePage(0);
+                                final prefs = Preferences();
+                                final tokenApi = TokenApi();
+
+                                if (prefs.token != null) {
+                                  if (prefs.token.length > 0) {
+                                    final tokenApi = TokenApi();
+                                    tokenApi.enviarToken(prefs.tokenFirebase);
+                                  }
+                                }
+                                tokenApi.enviarToken(prefs.tokenFirebase);
+
                                 Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
                               } else {
                                 showToast2(res.message.toString(), Colors.black);
