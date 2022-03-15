@@ -143,14 +143,18 @@ class PushNotificationService {
     //print('initialMessage $initialMessage');
 
     tokenFirebase = await FirebaseMessaging.instance.getToken();
+    if (kDebugMode) {
+      print(tokenFirebase);
+    }
 
     final prefs = Preferences();
 
     //String? token = await StorageManager.readData('token');
+
+    prefs.tokenFirebases = tokenFirebase!;
     if (prefs.token != null) {
       if (prefs.token.length > 0) {
-        tokenApi.enviarToken(tokenFirebase!);
-        prefs.tokenFirebases = tokenFirebase!;
+        tokenApi.enviarToken(tokenFirebase!); 
       }
     }
 
