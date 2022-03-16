@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,7 +12,9 @@ class LocalNotificationApi {
   static final onNotifications = BehaviorSubject<String?>();
 
   static _alertDetails() async {
-    print('entré');
+    if (kDebugMode) {
+      print('entré');
+    }
     return const NotificationDetails(
       android: AndroidNotificationDetails(
         'chanel id 2',

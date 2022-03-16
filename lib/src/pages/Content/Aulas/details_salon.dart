@@ -129,7 +129,7 @@ class DetailSalonTutor extends StatelessWidget {
                           //_addFaseTodosVSTodos(context, _catController.idCategoria);
                         }),
                   ],
-                  child: Icon(Icons.add),
+                  child: const Icon(Icons.add),
                 )
               : Container(),
           SizedBox(width: ScreenUtil().setWidth(10))

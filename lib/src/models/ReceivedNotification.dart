@@ -1,3 +1,4 @@
+// ignore: file_names
 class ReceivedNotification {
   int? id;
   String? title;

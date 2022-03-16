@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:478016235054:android:7ae585912f7782a17fa1bf",
+        "mobilesdk_app_id": "1:478016235054:android:e31611e225581b677fa1bf",
         "android_client_info": {
           "package_name": "com.bufeotec.salonapp"
         }
@@ -37,6 +37,13 @@
             {
               "client_id": "478016235054-tjeq81ufj492dnc8f3rluev186gcc6t0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "478016235054-30s5k2noh7nf80dv60ls50gpop8jr7a1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bufeotec.salonapp"
+              }
             }
           ]
         }
