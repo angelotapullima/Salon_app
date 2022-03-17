@@ -3,8 +3,8 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salon_app/src/api/local_notification_api.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
+import 'package:salon_app/src/pages/perfil.dart';
 import 'package:salon_app/src/pages/tutores/tabs/inicio_tutores_tab.dart';
-import 'package:salon_app/src/pages/tutores/tabs/perfil_tutores.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 
 class HomeTutores extends StatefulWidget {
@@ -19,7 +19,7 @@ class _HomeTutoresState extends State<HomeTutores> {
   @override
   void initState() {
     pageList.add(const InicioTurores());
-    pageList.add(const PerfilTutores());
+    pageList.add(const PerfilPage());
 
     super.initState();
     LocalNotificationApi.init(initScheluded: true);
@@ -31,9 +31,7 @@ class _HomeTutoresState extends State<HomeTutores> {
   }
 
   void onClickNotifications(String? playLoad) => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => Container()
-        ),
+        MaterialPageRoute(builder: (context) => Container()),
       );
 
   @override
@@ -106,7 +104,6 @@ class _HomeTutoresState extends State<HomeTutores> {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                       
                                         Icon(
                                           AntDesign.home,
                                           size: responsive.ip(3),
@@ -131,7 +128,6 @@ class _HomeTutoresState extends State<HomeTutores> {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        
                                         Icon(
                                           Feather.user,
                                           size: responsive.ip(3),

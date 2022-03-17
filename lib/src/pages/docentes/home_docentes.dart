@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salon_app/src/api/local_notification_api.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/pages/docentes/tabs/inicio_docentes.dart';
-import 'package:salon_app/src/pages/docentes/tabs/perfil_docentes.dart';
+import 'package:salon_app/src/pages/perfil.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 
 class HomeDocentes extends StatefulWidget {
@@ -19,7 +19,7 @@ class _HomeDocentesState extends State<HomeDocentes> {
   @override
   void initState() {
     pageList.add(const InicioDocentes());
-    pageList.add(const PerfilDocentes());
+    pageList.add(const PerfilPage());
 
     super.initState();
     LocalNotificationApi.init(initScheluded: true);
@@ -31,9 +31,7 @@ class _HomeDocentesState extends State<HomeDocentes> {
   }
 
   void onClickNotifications(String? playLoad) => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => Container()
-        ),
+        MaterialPageRoute(builder: (context) => Container()),
       );
 
   @override
@@ -106,7 +104,6 @@ class _HomeDocentesState extends State<HomeDocentes> {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                       
                                         Icon(
                                           AntDesign.home,
                                           size: responsive.ip(3),
@@ -131,7 +128,6 @@ class _HomeDocentesState extends State<HomeDocentes> {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        
                                         Icon(
                                           Feather.user,
                                           size: responsive.ip(3),

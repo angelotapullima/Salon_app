@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salon_app/src/api/local_notification_api.dart';
 import 'package:salon_app/src/bloc/provider_bloc.dart';
 import 'package:salon_app/src/pages/padres/inicio_padres.dart';
-import 'package:salon_app/src/pages/padres/tabs/perfil_padres.dart';
+import 'package:salon_app/src/pages/perfil.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 
 class HomePadre extends StatefulWidget {
@@ -19,7 +19,7 @@ class _HomePadreState extends State<HomePadre> {
   @override
   void initState() {
     pageList.add(const InicioPadre());
-    pageList.add(const PerfilPadres());
+    pageList.add(const PerfilPage());
 
     super.initState();
     LocalNotificationApi.init(initScheluded: true);
@@ -31,9 +31,7 @@ class _HomePadreState extends State<HomePadre> {
   }
 
   void onClickNotifications(String? playLoad) => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => Container()
-        ),
+        MaterialPageRoute(builder: (context) => Container()),
       );
 
   @override
@@ -106,7 +104,6 @@ class _HomePadreState extends State<HomePadre> {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                       
                                         Icon(
                                           AntDesign.home,
                                           size: responsive.ip(3),
@@ -131,7 +128,6 @@ class _HomePadreState extends State<HomePadre> {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        
                                         Icon(
                                           Feather.user,
                                           size: responsive.ip(3),
