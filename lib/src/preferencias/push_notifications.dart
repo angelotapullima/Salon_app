@@ -36,7 +36,7 @@ class FirebaseInstance {
 
     notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
 
-    var initializationSettingsAndroid = const AndroidInitializationSettings('logo');
+    var initializationSettingsAndroid = const AndroidInitializationSettings('ic_launcher');
     // Note: permissions aren't requested here just to demonstrate that can be done later using the `requestPermissions()` method
     // of the `IOSFlutterLocalNotificationsPlugin` class
     var initializationSettingsIOS = IOSInitializationSettings(

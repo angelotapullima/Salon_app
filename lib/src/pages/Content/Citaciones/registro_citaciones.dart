@@ -576,7 +576,7 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                                       final res = await avisoApi.saveAviso(
                                         widget.idAula,
                                         (!widget.aula) ? widget.idAlumno : '',
-                                        '2',
+                                        '1',
                                         _mensajeController.text,
                                         '$fechaDato $hourInitial',
                                         _tituloController.text,
@@ -585,7 +585,7 @@ class _RegistroCitacionesState extends State<RegistroCitaciones> {
                                       if (res.code == '1') {
                                         showToast2('Cliente agregado correctamente', Colors.green);
                                         final incidenciasBloc = ProviderBloc.citaciones(context);
-                                        incidenciasBloc.getCitaciones('1',false);
+                                        incidenciasBloc.getCitaciones('1', false);
                                         Navigator.pop(context);
                                         _cargando.value = false;
                                       } else {
