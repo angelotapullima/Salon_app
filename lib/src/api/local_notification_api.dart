@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+﻿// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -71,22 +71,23 @@ class LocalNotificationApi {
         await _alertDetails(),
         payload: playLoad,
         androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
       );
 
-  // static tz.TZDateTime _schuledDaily(Time time) {
-  //   final now = DateTime.now();
-  //   final schuledDate = tz.TZDateTime(
-  //     tz.local,
-  //     now.year,
-  //     now.month,
-  //     now.day,
-  //     time.hour,
-  //     time.minute,
-  //     time.second,
-  //   );
+// static tz.TZDateTime _schuledDaily(Time time) {
+//   final now = DateTime.now();
+//   final schuledDate = tz.TZDateTime(
+//     tz.local,
+//     now.year,
+//     now.month,
+//     now.day,
+//     time.hour,
+//     time.minute,
+//     time.second,
+//   );
 
-  //   return schuledDate.isBefore(now) ? schuledDate.add(Duration(days: 1)) : schuledDate;
-  // }
+//   return schuledDate.isBefore(now) ? schuledDate.add(Duration(days: 1)) : schuledDate;
+// }
 }

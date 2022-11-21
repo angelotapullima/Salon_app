@@ -148,6 +148,9 @@ class AvisoApi {
       });
 
       final decodedData = json.decode(resp.body);
+      if (kDebugMode) {
+        print(decodedData);
+      }
 
       HttpModel httpModel = HttpModel();
       httpModel.code = decodedData['result']['code'].toString();

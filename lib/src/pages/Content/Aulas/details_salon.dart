@@ -14,7 +14,8 @@ import 'package:salon_app/src/pages/Content/actividades/registro_actividades.dar
 class DetailSalonTutor extends StatelessWidget {
   final String valor;
   final AulaModel salon;
-  const DetailSalonTutor({Key? key, required this.salon, required this.valor}) : super(key: key);
+  const DetailSalonTutor({Key? key, required this.salon, required this.valor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +62,10 @@ class DetailSalonTutor extends StatelessWidget {
                             context,
                             PageRouteBuilder(
                               opaque: false,
-                              transitionDuration: const Duration(milliseconds: 400),
-                              pageBuilder: (context, animation, secondaryAnimation) {
+                              transitionDuration:
+                                  const Duration(milliseconds: 400),
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) {
                                 return RegistroActividades(
                                   aula: true,
                                   idAlumno: '',
@@ -72,7 +75,8 @@ class DetailSalonTutor extends StatelessWidget {
                                   seccion: '${salon.aulaSeccion}',
                                 );
                               },
-                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
                                 return FadeTransition(
                                   opacity: animation,
                                   child: child,
@@ -106,8 +110,10 @@ class DetailSalonTutor extends StatelessWidget {
                             context,
                             PageRouteBuilder(
                               opaque: false,
-                              transitionDuration: const Duration(milliseconds: 400),
-                              pageBuilder: (context, animation, secondaryAnimation) {
+                              transitionDuration:
+                                  const Duration(milliseconds: 400),
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) {
                                 return RegistroCitaciones(
                                   aula: true,
                                   idAlumno: '',
@@ -117,7 +123,8 @@ class DetailSalonTutor extends StatelessWidget {
                                   seccion: '${salon.aulaSeccion}',
                                 );
                               },
-                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
                                 return FadeTransition(
                                   opacity: animation,
                                   child: child,
@@ -161,23 +168,30 @@ class DetailSalonTutor extends StatelessWidget {
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return (valor == '1')
-                                ? InkWell(
+                                ? /*InkWell(
                                     onTap: () {
                                       Navigator.push(
                                         context,
                                         PageRouteBuilder(
                                           opaque: false,
-                                          transitionDuration: const Duration(milliseconds: 400),
-                                          pageBuilder: (context, animation, secondaryAnimation) {
+                                          transitionDuration:
+                                              const Duration(milliseconds: 400),
+                                          pageBuilder: (context, animation,
+                                              secondaryAnimation) {
                                             return RegistroDeIncidencia(
-                                              idAlumno: '${snapshot.data![index].idAlumno}',
+                                              idAlumno:
+                                                  '${snapshot.data![index].idAlumno}',
                                               idAula: '${salon.idAula}',
-                                              alumno: '${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}',
+                                              alumno:
+                                                  '${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}',
                                               grado: '${salon.aulaGrado}to',
                                               seccion: '${salon.aulaSeccion}',
                                             );
                                           },
-                                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                          transitionsBuilder: (context,
+                                              animation,
+                                              secondaryAnimation,
+                                              child) {
                                             return FadeTransition(
                                               opacity: animation,
                                               child: child,
@@ -188,39 +202,176 @@ class DetailSalonTutor extends StatelessWidget {
                                     },
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
-                                        vertical: ScreenUtil().setHeight(5),
+                                        vertical: ScreenUtil().setHeight(8),
                                         horizontal: ScreenUtil().setHeight(5),
                                       ),
                                       margin: EdgeInsets.symmetric(
                                         vertical: ScreenUtil().setHeight(5),
                                       ),
-                                      decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(5)),
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey.shade200,
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
                                       child: Column(
                                         children: [
                                           Row(
                                             children: [
-                                              Text('${int.parse(index.toString()) + 1}. '),
-                                              Text(' ${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}'),
-                                            ],
-                                          ),
-                                          Row(
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              const Text('Dni: '),
-                                              const Text(
-                                                ' 44556677',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
+                                              Text(
+                                                  '${int.parse(index.toString()) + 1}. '),
+                                              Text(
+                                                  ' ${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}'),
                                             ],
                                           ),
                                         ],
                                       ),
                                     ),
                                   )
-                                : FocusedMenuHolder(
-                                    blurBackgroundColor: Colors.white.withOpacity(0.01),
+                                */FocusedMenuHolder(
+                              blurBackgroundColor:
+                              Colors.white.withOpacity(0.01),
+                              blurSize: 0,
+                              openWithTap: true,
+                              onPressed: () {},
+                              menuItems: [
+                                FocusedMenuItem(
+                                    title: Row(
+                                      children: [
+                                        Text(
+                                          'Registrar  Incidencias',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                            ScreenUtil().setSp(14),
+                                            letterSpacing:
+                                            ScreenUtil().setSp(0.016),
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    trailingIcon: Icon(
+                                      Fontisto.paper_plane,
+                                      color: Colors.black,
+                                      size: ScreenUtil().setHeight(20),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          opaque: false,
+                                          transitionDuration:
+                                          const Duration(milliseconds: 400),
+                                          pageBuilder: (context, animation,
+                                              secondaryAnimation) {
+                                            return RegistroDeIncidencia(
+                                              idAlumno:
+                                              '${snapshot.data![index].idAlumno}',
+                                              idAula: '${salon.idAula}',
+                                              alumno:
+                                              '${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}',
+                                              grado: '${salon.aulaGrado}to',
+                                              seccion: '${salon.aulaSeccion}',
+                                            );
+                                          },
+                                          transitionsBuilder: (context,
+                                              animation,
+                                              secondaryAnimation,
+                                              child) {
+                                            return FadeTransition(
+                                              opacity: animation,
+                                              child: child,
+                                            );
+                                          },
+                                        ),
+                                      );  }),
+                                FocusedMenuItem(
+                                    title: Row(
+                                      children: [
+                                        Text(
+                                          'Registrar Citaciones',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                            ScreenUtil().setSp(14),
+                                            letterSpacing:
+                                            ScreenUtil().setSp(0.016),
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    trailingIcon: Icon(
+                                      AntDesign.paperclip,
+                                      color: Colors.black,
+                                      size: ScreenUtil().setHeight(20),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          opaque: false,
+                                          transitionDuration:
+                                          const Duration(
+                                              milliseconds: 400),
+                                          pageBuilder: (context,
+                                              animation,
+                                              secondaryAnimation) {
+                                            return RegistroCitaciones(
+                                              aula: false,
+                                              idAlumno:
+                                              '${snapshot.data![index].idAlumno}',
+                                              idAula: '${salon.idAula}',
+                                              alumno:
+                                              '${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}',
+                                              grado:
+                                              '${salon.aulaGrado}to',
+                                              seccion:
+                                              '${salon.aulaSeccion}',
+                                            );
+                                          },
+                                          transitionsBuilder: (context,
+                                              animation,
+                                              secondaryAnimation,
+                                              child) {
+                                            return FadeTransition(
+                                              opacity: animation,
+                                              child: child,
+                                            );
+                                          },
+                                        ),
+                                      );
+
+                                      //_addFaseTodosVSTodos(context, _catController.idCategoria);
+                                    }),
+                              ],
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: ScreenUtil().setHeight(10),
+                                  horizontal: ScreenUtil().setHeight(5),
+                                ),
+                                margin: EdgeInsets.symmetric(
+                                  vertical: ScreenUtil().setHeight(5),
+                                ),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,
+                                    borderRadius:
+                                    BorderRadius.circular(5)),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                            '${int.parse(index.toString()) + 1}. '),
+                                        Text(
+                                            ' ${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}'),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ): FocusedMenuHolder(
+                                    blurBackgroundColor:
+                                        Colors.white.withOpacity(0.01),
                                     blurSize: 0,
                                     openWithTap: true,
                                     onPressed: () {},
@@ -232,8 +383,10 @@ class DetailSalonTutor extends StatelessWidget {
                                                 'Registrar  Actividades',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w300,
-                                                  fontSize: ScreenUtil().setSp(14),
-                                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                                  fontSize:
+                                                      ScreenUtil().setSp(14),
+                                                  letterSpacing:
+                                                      ScreenUtil().setSp(0.016),
                                                   color: Colors.black,
                                                 ),
                                               ),
@@ -249,18 +402,29 @@ class DetailSalonTutor extends StatelessWidget {
                                               context,
                                               PageRouteBuilder(
                                                 opaque: false,
-                                                transitionDuration: const Duration(milliseconds: 400),
-                                                pageBuilder: (context, animation, secondaryAnimation) {
+                                                transitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 400),
+                                                pageBuilder: (context,
+                                                    animation,
+                                                    secondaryAnimation) {
                                                   return RegistroActividades(
                                                     aula: false,
-                                                    idAlumno: '${snapshot.data![index].idAlumno}',
+                                                    idAlumno:
+                                                        '${snapshot.data![index].idAlumno}',
                                                     idAula: '${salon.idAula}',
-                                                    alumno: '${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}',
-                                                    grado: '${salon.aulaGrado}to',
-                                                    seccion: '${salon.aulaSeccion}',
+                                                    alumno:
+                                                        '${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}',
+                                                    grado:
+                                                        '${salon.aulaGrado}to',
+                                                    seccion:
+                                                        '${salon.aulaSeccion}',
                                                   );
                                                 },
-                                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                transitionsBuilder: (context,
+                                                    animation,
+                                                    secondaryAnimation,
+                                                    child) {
                                                   return FadeTransition(
                                                     opacity: animation,
                                                     child: child,
@@ -277,8 +441,10 @@ class DetailSalonTutor extends StatelessWidget {
                                                 'Registrar Citaciones',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w300,
-                                                  fontSize: ScreenUtil().setSp(14),
-                                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                                  fontSize:
+                                                      ScreenUtil().setSp(14),
+                                                  letterSpacing:
+                                                      ScreenUtil().setSp(0.016),
                                                   color: Colors.black,
                                                 ),
                                               ),
@@ -294,18 +460,29 @@ class DetailSalonTutor extends StatelessWidget {
                                               context,
                                               PageRouteBuilder(
                                                 opaque: false,
-                                                transitionDuration: const Duration(milliseconds: 400),
-                                                pageBuilder: (context, animation, secondaryAnimation) {
+                                                transitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 400),
+                                                pageBuilder: (context,
+                                                    animation,
+                                                    secondaryAnimation) {
                                                   return RegistroCitaciones(
                                                     aula: false,
-                                                    idAlumno: '${snapshot.data![index].idAlumno}',
+                                                    idAlumno:
+                                                        '${snapshot.data![index].idAlumno}',
                                                     idAula: '${salon.idAula}',
-                                                    alumno: '${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}',
-                                                    grado: '${salon.aulaGrado}to',
-                                                    seccion: '${salon.aulaSeccion}',
+                                                    alumno:
+                                                        '${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}',
+                                                    grado:
+                                                        '${salon.aulaGrado}to',
+                                                    seccion:
+                                                        '${salon.aulaSeccion}',
                                                   );
                                                 },
-                                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                transitionsBuilder: (context,
+                                                    animation,
+                                                    secondaryAnimation,
+                                                    child) {
                                                   return FadeTransition(
                                                     opacity: animation,
                                                     child: child,
@@ -325,13 +502,18 @@ class DetailSalonTutor extends StatelessWidget {
                                       margin: EdgeInsets.symmetric(
                                         vertical: ScreenUtil().setHeight(5),
                                       ),
-                                      decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(5)),
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey.shade200,
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
                                       child: Column(
                                         children: [
                                           Row(
                                             children: [
-                                              Text('${int.parse(index.toString()) + 1}. '),
-                                              Text(' ${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}'),
+                                              Text(
+                                                  '${int.parse(index.toString()) + 1}. '),
+                                              Text(
+                                                  ' ${snapshot.data![index].alumnoNombre} ${snapshot.data![index].alumnoApellido}'),
                                             ],
                                           ),
                                         ],

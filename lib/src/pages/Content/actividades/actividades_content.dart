@@ -25,10 +25,40 @@ class ActividadesContent extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<FechaAvisosModel>> alertas) {
           if (alertas.hasData) {
             if (alertas.data!.isNotEmpty) {
-              return _itemFechaActividases(context, alertas.data!);
+              return Stack(
+                children: [Opacity(
+                  opacity: .2,
+                  child: Center(
+                    child: SizedBox(
+                      height: ScreenUtil().setHeight(300),
+                      child: Image(
+                        image: AssetImage('assets/img/logo.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                  _itemFechaActividases(context, alertas.data!),
+                ],
+              );
             } else {
-              return const Center(
-                child: Text('No tiene ninguna Actividad'),
+              return Stack(
+                children: [Opacity(
+                  opacity: .2,
+                  child: Center(
+                    child: SizedBox(
+                      height: ScreenUtil().setHeight(300),
+                      child: Image(
+                        image: AssetImage('assets/img/logo.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                  const Center(
+                    child: Text('No tiene ninguna Actividad'),
+                  ),
+                ],
               );
             }
           } else {

@@ -5,14 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salon_app/src/pages/Content/Aulas/aulas_content.dart';
 import 'package:salon_app/src/pages/Content/Busqueda/buscar_estudiante.dart';
+import 'package:salon_app/src/pages/Content/Citaciones/citaciones_content.dart';
 import 'package:salon_app/src/pages/Content/Incidencias/incidencias_content.dart';
 import 'package:salon_app/src/preferencias/preferencias_usuario.dart';
 import 'package:salon_app/src/utils/colors.dart';
 import 'package:salon_app/src/utils/responsive.dart';
 
-class InicioTurores extends StatelessWidget {
+class InicioTutores extends StatelessWidget {
   static final _controller = Controller();
-  const InicioTurores({Key? key}) : super(key: key);
+  const InicioTutores({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,8 @@ class InicioTurores extends StatelessWidget {
         animation: _controller,
         builder: (context, t) {
           return Scaffold(
-            floatingActionButton: (_controller.valueBoton == 2) ? Container() : Container(),
+            floatingActionButton:
+                (_controller.valueBoton == 2) ? Container() : Container(),
             //backgroundColor: const Color.fromARGB(255, 245, 246, 248),
             backgroundColor: const Color(0xfff1eff6),
             body: SafeArea(
@@ -46,7 +48,9 @@ class InicioTurores extends StatelessWidget {
                             placeholder: (context, url) => const SizedBox(
                               width: double.infinity,
                               height: double.infinity,
-                              child: Image(image: AssetImage('assets/img/profile.png'), fit: BoxFit.cover),
+                              child: Image(
+                                  image: AssetImage('assets/img/profile.png'),
+                                  fit: BoxFit.cover),
                             ),
                             errorWidget: (context, url, error) => SizedBox(
                               child: SizedBox(
@@ -79,12 +83,14 @@ class InicioTurores extends StatelessWidget {
                           Navigator.push(
                             context,
                             PageRouteBuilder(
-                              pageBuilder: (context, animation, secondaryAnimation) {
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) {
                                 return const BuscarEstudiantePage(
                                   valor: '1',
                                 );
                               },
-                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
                                 var begin = const Offset(0.0, 1.0);
                                 var end = Offset.zero;
                                 var curve = Curves.ease;
@@ -141,9 +147,13 @@ class InicioTurores extends StatelessWidget {
                       ),
                       child: (_controller.valueBoton == 1)
                           ? const Aulas(valor: '1')
-                          : const IncideciasContent(
-                              esHijo: false,
-                            ),
+                          : (_controller.valueBoton == 2)
+                              ? const IncideciasContent(
+                                  esHijo: false,
+                                )
+                              : const CitacionesContent(
+                                  esHijo: false,
+                                ),
                     ),
                   ),
                 )
@@ -156,7 +166,7 @@ class InicioTurores extends StatelessWidget {
   Container tabAnimated() {
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: ScreenUtil().setWidth(20),
+        horizontal: ScreenUtil().setWidth(5),
       ),
       padding: EdgeInsets.symmetric(
         horizontal: ScreenUtil().setWidth(3),
@@ -188,7 +198,9 @@ class InicioTurores extends StatelessWidget {
                   horizontal: ScreenUtil().setWidth(2),
                 ),
                 decoration: BoxDecoration(
-                  color: (_controller.valueBoton == 1) ? tabSelected : tabUnSelected,
+                  color: (_controller.valueBoton == 1)
+                      ? tabSelected
+                      : tabUnSelected,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Center(
@@ -198,7 +210,9 @@ class InicioTurores extends StatelessWidget {
                       Icon(
                         FontAwesome5Brands.servicestack,
                         size: ScreenUtil().setSp(17),
-                        color: (_controller.valueBoton == 1) ? Colors.red : Colors.grey,
+                        color: (_controller.valueBoton == 1)
+                            ? Colors.red
+                            : Colors.grey,
                       ),
                       SizedBox(
                         width: ScreenUtil().setWidth(5),
@@ -206,7 +220,9 @@ class InicioTurores extends StatelessWidget {
                       Text(
                         'Aulas',
                         style: GoogleFonts.poppins(
-                          color: (_controller.valueBoton == 1) ? colorTextSelect : colorTextUnSelect,
+                          color: (_controller.valueBoton == 1)
+                              ? colorTextSelect
+                              : colorTextUnSelect,
                           fontWeight: FontWeight.w500,
                           fontSize: ScreenUtil().setSp(14),
                         ),
@@ -229,7 +245,9 @@ class InicioTurores extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: (_controller.valueBoton == 2) ? tabSelected : tabUnSelected,
+                  color: (_controller.valueBoton == 2)
+                      ? tabSelected
+                      : tabUnSelected,
                 ),
                 child: Center(
                   child: Row(
@@ -238,7 +256,9 @@ class InicioTurores extends StatelessWidget {
                       Icon(
                         AntDesign.switcher,
                         size: ScreenUtil().setSp(17),
-                        color: (_controller.valueBoton == 2) ? Colors.red : Colors.grey,
+                        color: (_controller.valueBoton == 2)
+                            ? Colors.red
+                            : Colors.grey,
                       ),
                       SizedBox(
                         width: ScreenUtil().setWidth(5),
@@ -246,9 +266,57 @@ class InicioTurores extends StatelessWidget {
                       Text(
                         'Incidencias',
                         style: GoogleFonts.poppins(
-                          color: (_controller.valueBoton == 2) ? colorTextSelect : colorTextUnSelect,
+                          color: (_controller.valueBoton == 2)
+                              ? colorTextSelect
+                              : colorTextUnSelect,
                           fontWeight: FontWeight.w500,
-                          fontSize: ScreenUtil().setSp(14),
+                          fontSize: ScreenUtil().setSp(13),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                _controller.changeValueBoton(3);
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: ScreenUtil().setHeight(7),
+                  horizontal: ScreenUtil().setWidth(2),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: (_controller.valueBoton == 3)
+                      ? tabSelected
+                      : tabUnSelected,
+                ),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                      Icon(
+                        AntDesign.paperclip,
+                        size: ScreenUtil().setSp(17),
+                        color: (_controller.valueBoton == 3) ? Colors.red : Colors.grey,
+                      ),
+
+                      SizedBox(
+                        width: ScreenUtil().setWidth(5),
+                      ),
+                      Text(
+                        'Citaciones',
+                        style: GoogleFonts.poppins(
+                          color: (_controller.valueBoton == 3)
+                              ? colorTextSelect
+                              : colorTextUnSelect,
+                          fontWeight: FontWeight.w500,
+                          fontSize: ScreenUtil().setSp(13),
                         ),
                       ),
                     ],

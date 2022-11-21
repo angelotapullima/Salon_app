@@ -152,9 +152,9 @@ class PushNotificationService {
     //String? token = await StorageManager.readData('token');
 
     prefs.tokenFirebases = tokenFirebase!;
-    if (prefs.token != null) {
-      if (prefs.token.length > 0) {
-        tokenApi.enviarToken(tokenFirebase!); 
+    if (prefs.token != null && prefs.tokenFirebase != null) {
+      if (prefs.token.length > 0 && prefs.tokenFirebase.length > 0) {
+        tokenApi.enviarToken(tokenFirebase!);
       }
     }
 

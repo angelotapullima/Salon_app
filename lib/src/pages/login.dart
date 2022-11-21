@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,9 +44,12 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       height: ScreenUtil().setHeight(61),
                     ),
-                    const SizedBox(
-                      child: FlutterLogo(
-                        size: 150,
+                    Container(
+                      height: ScreenUtil().setHeight(250),
+
+                      child: Image(
+                        image: AssetImage('assets/img/logo.png'),
+                        fit: BoxFit.cover,
                       ),
                     ),
                     Text(
@@ -170,15 +171,13 @@ class _LoginState extends State<Login> {
                                 final bottomBloc = ProviderBloc.botton(context);
                                 bottomBloc.changePage(0);
                                 final prefs = Preferences();
-                                final tokenApi = TokenApi();
 
-                                if (prefs.token != null) {
-                                  if (prefs.token.length > 0) {
+                                if (prefs.token != null && prefs.tokenFirebase != null) {
+                                  if (prefs.token.length > 0 && prefs.tokenFirebase.length > 0) {
                                     final tokenApi = TokenApi();
                                     tokenApi.enviarToken(prefs.tokenFirebase);
                                   }
                                 }
-                                tokenApi.enviarToken(prefs.tokenFirebase);
 
                                 Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
                               } else {

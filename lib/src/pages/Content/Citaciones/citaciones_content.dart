@@ -24,10 +24,42 @@ class CitacionesContent extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<FechaAvisosModel>> alertas) {
           if (alertas.hasData) {
             if (alertas.data!.isNotEmpty) {
-              return _itemFechaAlert(context, alertas.data!);
+              return Stack(
+                children: [
+                  Opacity(
+                    opacity: .2,
+                    child: Center(
+                      child: SizedBox(
+                        height: ScreenUtil().setHeight(300),
+                        child: Image(
+                          image: AssetImage('assets/img/logo.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  _itemFechaAlert(context, alertas.data!),
+                ],
+              );
             } else {
-              return const Center(
-                child: Text('No tiene ninguna citación'),
+              return Stack(
+                children: [
+                  Opacity(
+                    opacity: .2,
+                    child: Center(
+                      child: SizedBox(
+                        height: ScreenUtil().setHeight(300),
+                        child: Image(
+                          image: AssetImage('assets/img/logo.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Center(
+                    child: Text('No tiene ninguna citación'),
+                  ),
+                ],
               );
             }
           } else {

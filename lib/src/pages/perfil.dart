@@ -24,12 +24,12 @@ class PerfilPage extends StatelessWidget {
             SizedBox(
               height: ScreenUtil().setHeight(50),
             ),
-            Center(
-              child: SizedBox(
-                width: ScreenUtil().setWidth(200),
-                height: ScreenUtil().setHeight(200),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: ScreenUtil().setWidth(200),
+                  height: ScreenUtil().setHeight(200),
                   child: CachedNetworkImage(
                     placeholder: (context, url) => const SizedBox(
                       width: double.infinity,
@@ -37,18 +37,20 @@ class PerfilPage extends StatelessWidget {
                       child: Image(image: AssetImage('assets/img/profile.png'), fit: BoxFit.cover),
                     ),
                     errorWidget: (context, url, error) => SizedBox(
-                      child: Image.asset(
-                        'assets/img/profile.png',
-                        fit: BoxFit.cover,
-                        width: ScreenUtil().setWidth(150),
-                        height: ScreenUtil().setHeight(150),
+                      child: ClipRRect( borderRadius: BorderRadius.circular(200),
+                        child: Image.asset(
+                          'assets/img/profile.png',
+                          fit: BoxFit.cover,
+                          width: ScreenUtil().setWidth(150),
+                          height: ScreenUtil().setHeight(150),
+                        ),
                       ),
                     ),
                     imageUrl: '$apiBaseURL/${prefs.image}',
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.red, width: ScreenUtil().setWidth(3)),
-                        shape: BoxShape.circle,
+                        //shape: BoxShape.circle,
                         image: DecorationImage(
                           image: imageProvider,
                           fit: BoxFit.cover,
@@ -57,7 +59,7 @@ class PerfilPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
             SizedBox(
               height: ScreenUtil().setHeight(8),

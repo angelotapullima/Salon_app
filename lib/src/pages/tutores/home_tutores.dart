@@ -18,7 +18,7 @@ class _HomeTutoresState extends State<HomeTutores> {
 
   @override
   void initState() {
-    pageList.add(const InicioTurores());
+    pageList.add(const InicioTutores());
     pageList.add(const PerfilPage());
 
     super.initState();
